@@ -12,15 +12,15 @@
 
 
 // main fjernes paa sikt naar programmet utvides
-int main( void){
+int uart_main( void){
 	unsigned char msg;
 	
 	UART_Init ( MYUBRR );
 	
 	while(1){
 		msg = UART_Recieve();
-		printf("%c\n", msg);
-		//UART_Transmit('h');
+		//printf("%c\n", msg);
+		UART_Transmit(msg);
 		//printf("jeg vil sove 'zzzzzzz'\n1 sau, 2 sau, 3 sau ...\n\n");
 		_delay_ms(1000);
 	}
