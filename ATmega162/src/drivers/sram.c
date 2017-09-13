@@ -8,6 +8,7 @@
 
 #include "sram.h"
 #include "uart.h"	// for sram_main
+#include "../setup.h"
 #include <avr/io.h>
 #include <stdlib.h>
 #include <stdio.h>

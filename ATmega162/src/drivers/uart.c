@@ -6,6 +6,7 @@
  */ 
 
 #include "uart.h"
+#include "../setup.h"
 #include <avr/io.h>
 #include <stdio.h>
 #include <util/delay.h>
