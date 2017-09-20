@@ -5,6 +5,7 @@
  *  Author: ingunnjv
  */ 
 #include "../bit_manipulation.h"
+#include "../memory_mapping.h"
 #include <avr/io.h>
 
 int ADC_init(void)
@@ -19,7 +20,7 @@ int ADC_init(void)
 
 uint8_t ADC_read(uint8_t channel)
 {
-	volatile uint8_t *ext_adc = (uint8_t *) 0x1400; // Start address for the ADC
+	volatile uint8_t *ext_adc = (uint8_t *) ADC_DATA_ADDRESS; // Start address for the ADC
 	
 	if (channel > 3){ return 0; }
 	*ext_adc = 0x04 | channel; // bitwise OR

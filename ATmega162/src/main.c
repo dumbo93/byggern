@@ -10,46 +10,26 @@
 #include "drivers/adc.h"
 #include "drivers/joystick.h"
 #include "drivers/touch_panel.h"
+#include "drivers/oled.h"
 
 #include <avr/io.h>
 #include <util/delay.h>
+#include <stdio.h>
 
 int main( void ){
 	
 	UART_Init( MYUBRR );
-	JOY_init();
-	JOY_position_t pos;
-	JOY_direction_t dir;
-	int buttonPress_l = 0;
-	int buttonPress_r = 0;
+	OLED_init();
+	OLED_reset();
 	
-	TOUCH_slider_pos_t slider_pos;
-	
-	
-	while(1){
-		/*
-		pos = JOY_get_position();
-		
-		dir = JOY_get_direction();
-		printf("Y: %d %% \t X: %d %% \t Direction: %d \n", pos.y, pos.x, dir);
-		*/
-		
-		/*
-		int posY = ADC_read(Y_POS_CHANNEL);
-		_delay_ms(1);
-		int posX = ADC_read(X_POS_CHANNEL);
-		printf("Y: %d %% \t X: %d %%\n", (int)posY, (int)posX);
-		*/
-		
-		buttonPress_l = TOUCH_button(LEFT_BUTTON);
-		buttonPress_r = TOUCH_button(RIGHT_BUTTON);
-		//printf("Left: %d \t Right %d \n", buttonPress_l, buttonPress_r);
-		
-		slider_pos = TOUCH_get_slider_position();
-		printf("Left slider: %d \t Right slider: %d \n", slider_pos.left_slider, slider_pos.right_slider);
-		
-		
+	for(int line = 0; line < NUM_LINES; line++){
+		for (int col = 0; col < NUM_COLUMNS; col++){
+			OLED_write_data(0xFF);
+		}
 	}
+	OLED_clear_line( 4 );
+	
+	
 	
 	return 0;
 }

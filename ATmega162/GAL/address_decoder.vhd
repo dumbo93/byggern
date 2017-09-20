@@ -18,7 +18,7 @@ entity GAL_addrSelect is
     
     attribute LOC : string;
     
-    attribute LOC of ram_cs     : signal is "P19";
+    attribute LOC of ram_cs     : signal is "P19"
     attribute LOC of adc_cs     : signal is "P18";
     attribute LOC of oled_cs    : signal is "P17";
     attribute LOC of oled_dc    : signal is "P16";
@@ -36,6 +36,8 @@ begin
 	-- ADC and OLED chip selects are active low
 	adc_cs <= NOT( ( NOT a11 ) AND a10);
 	oled_cs <= NOT( ( NOT a11 ) AND ( NOT a10 ) );
+	-- OLED data/!command
+	oled_dc <= a9;
 
 end behavioral;
 
