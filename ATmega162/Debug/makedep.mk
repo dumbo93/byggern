@@ -8,6 +8,8 @@ src\drivers\joystick.c
 
 src\drivers\sram.c
 
+src\drivers\touch_panel.c
+
 src\drivers\uart.c
 
 src\main.c

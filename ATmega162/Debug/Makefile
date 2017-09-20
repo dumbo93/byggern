@@ -42,6 +42,7 @@ C_SRCS +=  \
 ../src/drivers/adc.c \
 ../src/drivers/joystick.c \
 ../src/drivers/sram.c \
+../src/drivers/touch_panel.c \
 ../src/drivers/uart.c \
 ../src/main.c
 
@@ -56,6 +57,7 @@ OBJS +=  \
 src/drivers/adc.o \
 src/drivers/joystick.o \
 src/drivers/sram.o \
+src/drivers/touch_panel.o \
 src/drivers/uart.o \
 src/main.o
 
@@ -63,6 +65,7 @@ OBJS_AS_ARGS +=  \
 src/drivers/adc.o \
 src/drivers/joystick.o \
 src/drivers/sram.o \
+src/drivers/touch_panel.o \
 src/drivers/uart.o \
 src/main.o
 
@@ -70,6 +73,7 @@ C_DEPS +=  \
 src/drivers/adc.d \
 src/drivers/joystick.d \
 src/drivers/sram.d \
+src/drivers/touch_panel.d \
 src/drivers/uart.d \
 src/main.d
 
@@ -77,6 +81,7 @@ C_DEPS_AS_ARGS +=  \
 src/drivers/adc.d \
 src/drivers/joystick.d \
 src/drivers/sram.d \
+src/drivers/touch_panel.d \
 src/drivers/uart.d \
 src/main.d
 
@@ -94,6 +99,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

@@ -12,10 +12,6 @@
 #define Y_POS_CHANNEL 0
 #define X_POS_CHANNEL 1
 
-#define JOY_BUTTON 0
-#define LEFT_BUTTON 1
-#define RIGHT_BUTTON 2
-
 typedef enum {NEUTRAL, LEFT, RIGHT, UP, DOWN} JOY_direction_t;
 
 
@@ -26,7 +22,7 @@ typedef struct JOY_pos {
 	
 void JOY_init( void );
 void JOY_calibrate( void );
-int JOY_button( int button );
+int JOY_button();
 JOY_position_t JOY_read_adc( void );
 JOY_position_t JOY_get_position();
 JOY_direction_t JOY_get_direction();

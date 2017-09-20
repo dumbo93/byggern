@@ -19,14 +19,11 @@ void JOY_init( void ){
 	ADC_init();
 	JOY_calibrate();
 	
-	// Initialize PORT B, pin 0, 1 and 2 as input
+	// Initialize PORT B, pin 0 (joystick button) as input
 	clear_bit(DDRB, PINB0);
-	clear_bit(DDRB, PINB1);
-	clear_bit(DDRB, PINB2);
 	
 	// Activate pull-up resistor for joystick button
 	set_bit(PORTB, PB0);
-	
 	
 }
 
@@ -34,22 +31,8 @@ void JOY_calibrate( void ){
 	neutral_pos = JOY_read_adc();
 }
 
-int JOY_button( int button ){
-	switch (button) {
-		case JOY_BUTTON:
-			return !(test_bit(PINB, PINB0));
-			break;
-		case LEFT_BUTTON:
-			if(test_bit(PINB, PB1)) { return 1; }
-			break;
-		case RIGHT_BUTTON:
-			if(test_bit(PINB, PB2)) { return 1; }
-			break;
-		default:
-			return 0;
-	}
-	return 0;
-
+int JOY_button(){
+	return !(test_bit(PINB, PINB0));
 }
 
 JOY_position_t JOY_read_adc( void ){
