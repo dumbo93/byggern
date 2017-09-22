@@ -16,7 +16,6 @@ JOY_position_t neutral_pos;
 
 
 void JOY_init( void ){
-	ADC_init();
 	JOY_calibrate();
 	
 	// Initialize PORT B, pin 0 (joystick button) as input

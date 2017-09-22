@@ -12,7 +12,6 @@
 #include <util/delay.h>
 
 void TOUCH_init( void ){
-	ADC_init();
 	
 	// Initialize PORT B, pin 0, 1 and 2 as input
 	clear_bit(DDRB, PINB1);
