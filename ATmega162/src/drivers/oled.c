@@ -15,7 +15,6 @@ volatile uint8_t *oled_data = (uint8_t *) OLED_DATA_ADDRESS;	// Start address fo
 
 void OLED_init( void )
 {
-	ADC_init();
 	
 	OLED_write_command(DISPLAY_OFF);
 	OLED_write_command(SEGMENT_REMAP);

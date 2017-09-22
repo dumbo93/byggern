@@ -18,15 +18,16 @@
 
 int main( void ){
 	
+	// Initializations 
 	UART_Init( MYUBRR );
 	ADC_init();
 	JOY_init();
 	TOUCH_init();
+	//OLED_init();
 	
 	int button = 0;
 	JOY_direction_t test;
 	TOUCH_slider_pos_t slider;
-	//OLED_init();
 	//OLED_reset();
 	//
 	//for(int line = 0; line < NUM_LINES; line++){
@@ -38,7 +39,7 @@ int main( void ){
 	while (1)
 	{	
 		button = JOY_button();
-		//test = JOY_get_direction();
+		test = JOY_get_direction();
 		slider = TOUCH_get_slider_position();
 		//printf("Button pressed: %d \n",button);
 		//printf("Button pressed: %d, \t Direction: %d \n",button, test);
