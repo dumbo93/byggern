@@ -9,6 +9,8 @@
 #include "adc.h"
 #include "../memory_mapping.h"
 #include <avr/io.h>
+#include <stdio.h>
+#include <font_normal.h>
 
 volatile uint8_t *oled_cmd = (uint8_t *) OLED_COMMAND_ADDRESS;	// Start address for the OLED command
 volatile uint8_t *oled_data = (uint8_t *) OLED_DATA_ADDRESS;	// Start address for the OLED data
@@ -124,6 +126,18 @@ void OLED_set_contrast( uint8_t level )
 }
 
 void OLED_print_char( char *character )
+{	
+	int i;
+	for (i = 0; i<5; i++){
+		OLED_write_data(pgm_read_byte(&font[*character - ' '][i]));
+	}
+}
+
+void OLED_print(char *c)
 {
-	
+	int i;
+	for (i=0;i > lenght(c);i++)
+	{
+		OLED_print_char(&c(i))
+	}
 }
