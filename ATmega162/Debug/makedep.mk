@@ -16,3 +16,5 @@ src\drivers\uart.c
 
 src\main.c
 
+src\menu.c
+

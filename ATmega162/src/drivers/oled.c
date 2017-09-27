@@ -50,6 +50,8 @@ void OLED_init( void )
 
 	OLED_write_command(SET_NORMAL_DISPLAY);
 	OLED_write_command(DISPLAY_ON);
+	
+	OLED_reset();
 }
 
 void OLED_write_command( uint8_t command )
@@ -125,19 +127,56 @@ void OLED_set_contrast( uint8_t level )
 	OLED_write_command(level);
 }
 
-void OLED_print_char( char *character )
+void OLED_print_char( char *character, uint8_t line)
 {	
-	int i;
-	for (i = 0; i < 5; i++){
-		OLED_write_data(pgm_read_byte(&font5[*character - ' '][i]));
+	printf("Character: %c \n", *character);
+	if ((*character) == '\n'){
+		printf("newline\n");
+		OLED_pos(line + 1, 0);
+	}
+	else{
+		int i;
+		for (i = 0; i < 5; i++){
+			OLED_write_data(pgm_read_byte(&font5[*character - ' '][i]));
+		}
 	}
 }
 
-void OLED_print(char *c)
+void OLED_print(char *c, uint8_t line)
 {
 	int i = 0;
 	while(c[i] != '\0'){
-		OLED_print_char(&c[i]);
+		printf("From OLED_print %c \n", c[i]);
+		OLED_print_char(&c[i], line);
 		i++;
+	}
+}
+
+void OLED_smiley()
+{
+	OLED_pos(2,32);
+	for (int col = 0; col < 10; col++){
+		OLED_write_data(0xFF);
+	}
+	OLED_pos(2,85);
+	for (int col = 0; col < 10; col++){
+		OLED_write_data(0xFF);
+	}
+	
+	OLED_pos(4, 32);
+	for (int col = 0; col < 63; col++){
+		OLED_write_data(0xF0);
+	}
+	
+	OLED_pos(5, 42);
+	for (int col = 0; col < 43; col++){
+		OLED_write_data(0xFF);
+	}
+	
+
+
+	OLED_pos(6, 57);
+	for (int col = 0; col < 13; col++){
+		OLED_write_data(0xFF);
 	}
 }

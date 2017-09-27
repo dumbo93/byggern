@@ -11,6 +11,7 @@
 #include "drivers/joystick.h"
 #include "drivers/touch_panel.h"
 #include "drivers/oled.h"
+#include "menu.h"
 
 #include <avr/io.h>
 #include <util/delay.h>
@@ -24,15 +25,25 @@ int main( void ){
 	JOY_init();
 	TOUCH_init();
 	OLED_init();
+	//MENU_init();
+	
+	OLED_smiley();
 
 	
-	int button = 0;
-	JOY_direction_t test;
-	TOUCH_slider_pos_t slider;
-	OLED_reset();
-	char a[14] = "funker dette?";
-	OLED_print(a);
-	
+	//int button = 0;
+	//JOY_direction_t test;
+	//TOUCH_slider_pos_t slider;
+	//printf("Start\n");
+	//OLED_reset();
+	//char a[15] = "funker dette?\n";
+	//OLED_print(a, 0);
+	//char b[20] = "funker det naa?\n";
+	//OLED_print(b, 0);
+	//printf("End\n");
+	//char c[20] = "funker dette da?";
+	//OLED_print(c, 0);
+	//
+	//
 	//for(uint8_t line = 0; line < NUM_LINES; line = line +1){
 		//OLED_pos(line, 0);
 		//for (uint8_t col = 0; col < NUM_COLUMNS; col++){
