@@ -55,6 +55,8 @@ void OLED_home( void );
 void OLED_clear_line( uint8_t line );
 void OLED_reset( void );
 void OLED_set_contrast( uint8_t level );
+void OLED_print_char( char *character );
+void OLED_print(char *c);
 
 
 #endif /* OLED_H_ */

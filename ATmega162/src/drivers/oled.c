@@ -10,7 +10,7 @@
 #include "../memory_mapping.h"
 #include <avr/io.h>
 #include <stdio.h>
-#include <font_normal.h>
+#include "font_normal.h"
 
 volatile uint8_t *oled_cmd = (uint8_t *) OLED_COMMAND_ADDRESS;	// Start address for the OLED command
 volatile uint8_t *oled_data = (uint8_t *) OLED_DATA_ADDRESS;	// Start address for the OLED data
@@ -79,7 +79,7 @@ void OLED_goto_line( uint8_t line )
 {
 	OLED_write_command(SET_PAGE_ADDRESS);
 	OLED_write_command(line);
-	OLED_write_command(0x7);
+	OLED_write_command(7);
 }
 
 void OLED_pos(uint8_t row, uint8_t column)
@@ -101,7 +101,7 @@ void OLED_clear_line( uint8_t line )
 	OLED_pos(line, 0);
 	
 	// go through all columns
-	for (int col = 0; col < NUM_COLUMNS; col++){
+	for (uint8_t col = 0; col < NUM_COLUMNS; col++){
 		// write 8 bits to each column
 		OLED_write_data(0x00);
 	}
@@ -110,7 +110,7 @@ void OLED_clear_line( uint8_t line )
 void OLED_reset( void )
 {
 	// clear all lines
-	for (int line = 0; line < NUM_LINES; line++){
+	for (uint8_t line = 0; line < NUM_LINES; line++){
 		OLED_clear_line(line);
 	}
 	
@@ -128,16 +128,16 @@ void OLED_set_contrast( uint8_t level )
 void OLED_print_char( char *character )
 {	
 	int i;
-	for (i = 0; i<5; i++){
-		OLED_write_data(pgm_read_byte(&font[*character - ' '][i]));
+	for (i = 0; i < 5; i++){
+		OLED_write_data(pgm_read_byte(&font5[*character - ' '][i]));
 	}
 }
 
 void OLED_print(char *c)
 {
-	int i;
-	for (i=0;i > lenght(c);i++)
-	{
-		OLED_print_char(&c(i))
+	int i = 0;
+	while(c[i] != '\0'){
+		OLED_print_char(&c[i]);
+		i++;
 	}
 }
