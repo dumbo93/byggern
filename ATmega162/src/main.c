@@ -25,9 +25,10 @@ int main( void ){
 	JOY_init();
 	TOUCH_init();
 	OLED_init();
-	//MENU_init();
+	MENU_init();
 	
-	OLED_smiley();
+	
+	//OLED_smiley();
 
 	
 	//int button = 0;
@@ -36,13 +37,13 @@ int main( void ){
 	//printf("Start\n");
 	//OLED_reset();
 	//char a[15] = "funker dette?\n";
-	//OLED_print(a, 0);
+	//OLED_print(a, 1);
 	//char b[20] = "funker det naa?\n";
-	//OLED_print(b, 0);
+	//OLED_print(b, 2);
 	//printf("End\n");
 	//char c[20] = "funker dette da?";
-	//OLED_print(c, 0);
-	//
+	//OLED_print(c, 3);
+
 	//
 	//for(uint8_t line = 0; line < NUM_LINES; line = line +1){
 		//OLED_pos(line, 0);
@@ -52,17 +53,17 @@ int main( void ){
 	//}
 	//uint8_t line_nr = 7;
 	//OLED_clear_line( line_nr );
-	
+	//
 	//while (1)
 	//{	
 		//button = JOY_button();
 		//test = JOY_get_direction();
 		//slider = TOUCH_get_slider_position();
-		////printf("Button pressed: %d \n",button);
-		//printf("Button pressed: %d, \t Direction: %d \t Slider left: %d \t Slider right: %d \n",button, test, slider.left_slider, slider.right_slider);
+		//printf("Button pressed: %d \n",button);
+		////printf("Button pressed: %d, \t Direction: %d \t Slider left: %d \t Slider right: %d \n",button, test, slider.left_slider, slider.right_slider);
 		////printf("Slider left: %d \t Slider right: %d \n",slider.left_slider, slider.right_slider);
 	//}
-	
+	//
 
 	return 0;
 }

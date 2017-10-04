@@ -131,7 +131,7 @@ void OLED_print_char( char *character, uint8_t line)
 {	
 	printf("Character: %c \n", *character);
 	if ((*character) == '\n'){
-		printf("newline\n");
+		//printf("newline\n");
 		OLED_pos(line + 1, 0);
 	}
 	else{
@@ -146,11 +146,12 @@ void OLED_print(char *c, uint8_t line)
 {
 	int i = 0;
 	while(c[i] != '\0'){
-		printf("From OLED_print %c \n", c[i]);
+		//printf("From OLED_print %c \n", c[i]);
 		OLED_print_char(&c[i], line);
 		i++;
 	}
 }
+
 
 void OLED_smiley()
 {
