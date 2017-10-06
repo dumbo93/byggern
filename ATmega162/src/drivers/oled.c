@@ -129,7 +129,7 @@ void OLED_set_contrast( uint8_t level )
 
 void OLED_print_char( char *character, uint8_t line)
 {	
-	printf("Character: %c \n", *character);
+	//printf("Character: %c \n", *character);
 	if ((*character) == '\n'){
 		//printf("newline\n");
 		OLED_pos(line + 1, 0);
@@ -150,6 +150,21 @@ void OLED_print(char *c, uint8_t line)
 		OLED_print_char(&c[i], line);
 		i++;
 	}
+}
+
+void OLED_print_arrow( void )
+{
+	OLED_write_data(0b00011000);
+	OLED_write_data(0b00011000);
+	OLED_write_data(0b00011000);
+	OLED_write_data(0b00011000);
+	OLED_write_data(0b00011000);
+	OLED_write_data(0b11111111);
+	OLED_write_data(0b01111110);
+	OLED_write_data(0b00111100);
+	OLED_write_data(0b00011000);
+	OLED_write_data(0b00000000);
+
 }
 
 

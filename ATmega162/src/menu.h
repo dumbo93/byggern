@@ -25,8 +25,10 @@ void MENU_init( void );
 void MENU_print_menu();
 
 void MENU_select_item();
-//
-//void MENU_navigate(menu_item_info_t item, menu_item_info_t current_child ,int line);
+
+void MENU_navigate();
+
+void MENU_highlight_item( void );
 
 
 

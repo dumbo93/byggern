@@ -56,10 +56,10 @@ int main( void ){
 	//
 	//while (1)
 	//{	
-		//button = JOY_button();
+		////button = JOY_button();
 		//test = JOY_get_direction();
-		//slider = TOUCH_get_slider_position();
-		//printf("Button pressed: %d \n",button);
+		////slider = TOUCH_get_slider_position();
+		//printf("Direction: %d \n",test);
 		////printf("Button pressed: %d, \t Direction: %d \t Slider left: %d \t Slider right: %d \n",button, test, slider.left_slider, slider.right_slider);
 		////printf("Slider left: %d \t Slider right: %d \n",slider.left_slider, slider.right_slider);
 	//}
