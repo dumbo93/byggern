@@ -11,71 +11,77 @@
 
 #include <stdlib.h>
 
+menu_item_info_t main_menu, play_game, highscores, settings;
+
+menu_item_info_t main_menu ={
+	//.name = malloc(20),
+	.name = "Main menu\n",
+	.parent = NULL,
+	.child[0] = &play_game,
+	.child[1] = &highscores,
+	.child[2] = &settings,
+	.child_num = 3,
+};
+
+menu_item_info_t play_game = {
+	.name = "Play game\n",
+	.parent = &main_menu,
+	.child[0] = NULL,
+	.child_num = 0,
+};
+
+menu_item_info_t highscores ={
+	.name = "Highscores\n",
+	.parent = &main_menu,
+	.child[0] = NULL,
+	.child_num = 0,
+};
+
+menu_item_info_t settings ={
+	.name = "Settings\n",
+	.parent = &main_menu,
+	.child[0] = NULL,
+	.child_num = 0,
+};
+
+menu_item_info_t *current_menu;
+menu_item_info_t *current_child;
+
+
 
 void MENU_init( void ){
-	
-	menu_item_info_t main_menu, play_game, highscores, settings;
-	
-	menu_item_info_t items[] = {main_menu, play_game, highscores, settings};
-	
-
-	main_menu->name = malloc(20);
-	main_menu->name = "Main menu\n";
-	main_menu->parent = NULL;
-	main_menu->child[0] = play_game;
-	main_menu->child[1] = highscores;
-	main_menu->child[2] = settings;
-	
-	play_game->name = malloc(20);
-	play_game->name = "Play game\n";
-	play_game->parent = main_menu;	
-	play_game->child[0] = NULL;
-	
-	highscores->name = malloc(20);
-	highscores->name = "Highscores\n";
-	highscores->parent = main_menu;	
-	highscores->child[0] = NULL;
-	
-	settings->name = malloc(20);
-	settings->name = "Settings\n";
-	settings->parent = main_menu;
-	settings->child[0] = NULL;	
-
-	
-	
-	//printf("%s \n", main_menu->name);
-	OLED_print(main_menu->name,0);
-	//OLED_print(main_menu->child[0]->name,1);
-	//OLED_print(main_menu->child->next->name,2);
-	//OLED_print(main_menu->child->next->next->name,3);
-	//printf("%s \n", main_menu->name);
-	//printf("%s \n", main_menu->name);
-	//printf("%s \n", main_menu->name);
-	
-	
-
+	current_menu = &main_menu;
+	current_child = main_menu.child[0];
+	MENU_print_menu();
+	while(1){
+		MENU_select_item();
+	}
 
 }
 
 
-//void MENU_print_menu(item){
-	//OLED_print(item, 0);
-	//int i =1;
-	//menu_item_info_t head = item->child;
-	//while(head != NULL){
-		//OLED_print(head, i);
-		//head = head->next;
-		//i++;
-	//}
-//}
+void MENU_print_menu(){
+	printf("her\n");
+	OLED_reset();
+	OLED_print(current_menu->name, 0);
+	printf("her nå \n");
+	for (int i =0; i < current_menu->child_num; i++){
+		printf("%d \n", current_menu->child_num);
+		printf("in for at child %d \n",i);
+		OLED_print(current_menu->child[i]->name,i+1);
+	}
+}
 
 
-//void MENU_select_item( item ){
+void MENU_select_item(){
 	//int pressed = JOY_button();
-	//if (pressed == 1){
-		//// item->child
-	//}
-//}
+	if (JOY_button()){
+		current_menu = current_child;
+		current_child = current_child->child[0];
+		
+		MENU_print_menu();
+	}
+}
 //
 //
 //
