@@ -52,6 +52,10 @@ void OLED_init( void )
 	OLED_write_command(DISPLAY_ON);
 	
 	OLED_reset();
+	
+	// Set display offset
+	OLED_write_command(0xD3);
+	OLED_write_command(0x20);
 }
 
 void OLED_write_command( uint8_t command )

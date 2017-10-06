@@ -6,7 +6,9 @@
  */ 
 #include "../bit_manipulation.h"
 #include "../memory_mapping.h"
+#include "../setup.h"
 #include <avr/io.h>
+#include <util/delay.h>
 
 int ADC_init(void)
 {
@@ -27,6 +29,8 @@ uint8_t ADC_read(uint8_t channel)
 	
 	// wait until interrupt is low, which means we can read the converted data
 	loop_until_bit_is_clear(PIND, PD3);
+	_delay_us(200);
+	
 	return *ext_adc;
 	
 }
