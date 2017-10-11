@@ -9,9 +9,10 @@
 #ifndef SPI_H_
 #define SPI_H_
 
+#include <avr/io.h>
 
 void SPI_init( void );
-char SPI_transmit_receive(char cData);
+uint8_t SPI_transmit_receive(uint8_t data);
 void SPI_set_ss( int val );
 
 #endif /* SPI_H_ */

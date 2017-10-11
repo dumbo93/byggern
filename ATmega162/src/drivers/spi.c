@@ -5,6 +5,7 @@
  *  Author: ingunnjv
  */ 
 #include "spi.h"
+#include "../bit_manipulation.h"
 #include <avr/io.h>
 
 void SPI_init( void )
@@ -16,10 +17,10 @@ void SPI_init( void )
 	DDRB = (1 << DDB5)|(1 << DDB7)|(1 << DDB4);
 }
 
-char SPI_transmit_receive(char cData)
+uint8_t SPI_transmit_receive(uint8_t data)
 {
 	// Start transmission (write to data register)
-	SPDR = cData;
+	SPDR = data;
 	
 	// Wait for transmission complete
 	while(!(SPSR & (1 << SPIF)));

@@ -40,7 +40,9 @@ SUBDIRS :=  \
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../src/drivers/adc.c \
+../src/drivers/can.c \
 ../src/drivers/joystick.c \
+../src/drivers/MCP2515.c \
 ../src/drivers/oled.c \
 ../src/drivers/spi.c \
 ../src/drivers/sram.c \
@@ -58,7 +60,9 @@ ASM_SRCS +=
 
 OBJS +=  \
 src/drivers/adc.o \
+src/drivers/can.o \
 src/drivers/joystick.o \
+src/drivers/MCP2515.o \
 src/drivers/oled.o \
 src/drivers/spi.o \
 src/drivers/sram.o \
@@ -69,7 +73,9 @@ src/menu.o
 
 OBJS_AS_ARGS +=  \
 src/drivers/adc.o \
+src/drivers/can.o \
 src/drivers/joystick.o \
+src/drivers/MCP2515.o \
 src/drivers/oled.o \
 src/drivers/spi.o \
 src/drivers/sram.o \
@@ -80,7 +86,9 @@ src/menu.o
 
 C_DEPS +=  \
 src/drivers/adc.d \
+src/drivers/can.d \
 src/drivers/joystick.d \
+src/drivers/MCP2515.d \
 src/drivers/oled.d \
 src/drivers/spi.d \
 src/drivers/sram.d \
@@ -91,7 +99,9 @@ src/menu.d
 
 C_DEPS_AS_ARGS +=  \
 src/drivers/adc.d \
+src/drivers/can.d \
 src/drivers/joystick.d \
+src/drivers/MCP2515.d \
 src/drivers/oled.d \
 src/drivers/spi.d \
 src/drivers/sram.d \
@@ -114,6 +124,10 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
+
+
 
 
 

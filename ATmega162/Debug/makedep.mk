@@ -4,7 +4,11 @@
 
 src\drivers\adc.c
 
+src\drivers\can.c
+
 src\drivers\joystick.c
+
+src\drivers\MCP2515.c
 
 src\drivers\oled.c
 
