@@ -133,6 +133,12 @@
     <Compile Include="src\drivers\oled.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\drivers\spi.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\drivers\spi.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\drivers\sram.c">
       <SubType>compile</SubType>
     </Compile>

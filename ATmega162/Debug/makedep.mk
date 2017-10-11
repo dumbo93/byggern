@@ -8,6 +8,8 @@ src\drivers\joystick.c
 
 src\drivers\oled.c
 
+src\drivers\spi.c
+
 src\drivers\sram.c
 
 src\drivers\touch_panel.c
