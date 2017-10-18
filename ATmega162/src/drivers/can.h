@@ -13,11 +13,15 @@
 
 typedef struct can_msg{
 	unsigned int id;
-	uint8_t length;
+	uint8_t length;		// max 8
 	uint8_t data[8];
 	}can_msg;
+	
+enum interrupt_flags {no_flag, RX0, RX1};
 
 void CAN_init();
-
+void CAN_msg_send(can_msg *message);
+void CAN_msg_receive(can_msg *msg, uint8_t reg);
+void CAN_handle_interrupt(can_msg *msg);
 
 #endif /* CAN_H_ */
