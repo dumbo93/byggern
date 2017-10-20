@@ -7,9 +7,9 @@
 
 
 #include "sram.h"
-#include "uart.h"	// for sram_main
-#include "../setup.h"
+//#include "../setup.h"
 #include "../memory_mapping.h"
+#include "../../../communication_drivers/uart.h"	// for sram_main
 #include <avr/io.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -57,10 +57,10 @@ void SRAM_test(void)
 
 }
 
-void sram_main(void)
-{
-	UART_Init ( MYUBRR );
-	SRAM_init();
-	SRAM_test();
-	
-}
+//void sram_main(void)
+//{
+	//UART_Init ( MYUBRR );
+	//SRAM_init();
+	//SRAM_test();
+	//
+//}

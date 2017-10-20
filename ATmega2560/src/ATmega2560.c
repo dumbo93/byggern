@@ -1,16 +1,12 @@
 /*
- * main.c
+ * ATmega2560.c
  *
- * Created: 11.09.2017 17:32:44
+ * Created: 20.10.2017 15:04:51
  *  Author: ingunnjv
  */ 
+
+
 #include "setup.h"
-#include "menu.h"
-#include "drivers/sram.h"
-#include "drivers/adc.h"
-#include "drivers/joystick.h"
-#include "drivers/touch_panel.h"
-#include "drivers/oled.h"
 #include "../../communication_drivers/uart.h"
 #include "../../communication_drivers/spi.h"
 #include "../../communication_drivers/MCP2515.h"
@@ -23,14 +19,8 @@
 
 int main( void ){
 	cli();
-	// Initializations 
+	// Initializations
 	UART_Init( MYUBRR );
-	ADC_init();
-	
-	//JOY_init();
-	//TOUCH_init();
-	//OLED_init();
-	//MENU_init();
 	SPI_init();
 	MCP_init();
 	CAN_init();

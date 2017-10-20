@@ -34,20 +34,21 @@ LINKER_SCRIPT_DEP:=
 # Every subdirectory with source files must be described here
 SUBDIRS :=  \
 ../src \
-../src/drivers
+../src/drivers \
+../src/communication_drivers
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../../communication_drivers/can.c \
+../../communication_drivers/MCP2515.c \
+../../communication_drivers/spi.c \
+../../communication_drivers/uart.c \
 ../src/drivers/adc.c \
-../src/drivers/can.c \
 ../src/drivers/joystick.c \
-../src/drivers/MCP2515.c \
 ../src/drivers/oled.c \
-../src/drivers/spi.c \
 ../src/drivers/sram.c \
 ../src/drivers/touch_panel.c \
-../src/drivers/uart.c \
 ../src/main.c \
 ../src/menu.c
 
@@ -59,54 +60,54 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+src/communication_drivers/can.o \
+src/communication_drivers/MCP2515.o \
+src/communication_drivers/spi.o \
+src/communication_drivers/uart.o \
 src/drivers/adc.o \
-src/drivers/can.o \
 src/drivers/joystick.o \
-src/drivers/MCP2515.o \
 src/drivers/oled.o \
-src/drivers/spi.o \
 src/drivers/sram.o \
 src/drivers/touch_panel.o \
-src/drivers/uart.o \
 src/main.o \
 src/menu.o
 
 OBJS_AS_ARGS +=  \
+src/communication_drivers/can.o \
+src/communication_drivers/MCP2515.o \
+src/communication_drivers/spi.o \
+src/communication_drivers/uart.o \
 src/drivers/adc.o \
-src/drivers/can.o \
 src/drivers/joystick.o \
-src/drivers/MCP2515.o \
 src/drivers/oled.o \
-src/drivers/spi.o \
 src/drivers/sram.o \
 src/drivers/touch_panel.o \
-src/drivers/uart.o \
 src/main.o \
 src/menu.o
 
 C_DEPS +=  \
+src/communication_drivers/can.d \
+src/communication_drivers/MCP2515.d \
+src/communication_drivers/spi.d \
+src/communication_drivers/uart.d \
 src/drivers/adc.d \
-src/drivers/can.d \
 src/drivers/joystick.d \
-src/drivers/MCP2515.d \
 src/drivers/oled.d \
-src/drivers/spi.d \
 src/drivers/sram.d \
 src/drivers/touch_panel.d \
-src/drivers/uart.d \
 src/main.d \
 src/menu.d
 
 C_DEPS_AS_ARGS +=  \
+src/communication_drivers/can.d \
+src/communication_drivers/MCP2515.d \
+src/communication_drivers/spi.d \
+src/communication_drivers/uart.d \
 src/drivers/adc.d \
-src/drivers/can.d \
 src/drivers/joystick.d \
-src/drivers/MCP2515.d \
 src/drivers/oled.d \
-src/drivers/spi.d \
 src/drivers/sram.d \
 src/drivers/touch_panel.d \
-src/drivers/uart.d \
 src/main.d \
 src/menu.d
 
@@ -146,6 +147,13 @@ LINKER_SCRIPT_DEP+=
 
 
 
+
+src/communication_drivers/%.o: ../../communication_drivers/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
 
 src/drivers/%.o: ../src/drivers/%.c
 	@echo Building file: $<

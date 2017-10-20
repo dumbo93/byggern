@@ -5,10 +5,8 @@
  *  Author: ingunnjv
  */ 
 #include "spi.h"
-#include "../setup.h"
-#include "../bit_manipulation.h"
+#include "../ATmega162/src/bit_manipulation.h"
 #include <avr/io.h>
-#include <util/delay.h>
 
 void SPI_init( void )
 {
@@ -16,7 +14,12 @@ void SPI_init( void )
 	SPCR = (1 << SPE)|(1 << MSTR)|(1 << SPR0);
 	
 	// Set MOSI, SCK and SS output
+	#if defined(__AVR_ATmega162__)
 	DDRB = (1 << DDB5)|(1 << DDB7)|(1 << DDB4);
+	#endif
+	#if defined(__AVR_ATmega2560__)
+	DDRB = (1 << DDB2)|(1 << DDB1)|(1 << DDB0);
+	#endif
 }
 
 uint8_t SPI_transmit_receive(uint8_t data)
@@ -34,10 +37,22 @@ uint8_t SPI_transmit_receive(uint8_t data)
 // Set _SS to 1 or 0
 void SPI_set_ss( int val )
 {
+	#if defined(__AVR_ATmega162__)
 	if (val == 1){
 		set_bit(PORTB, PB4);
 	}
 	else if (val == 0){
 		clear_bit(PORTB, PB4);
 	}
+	#endif
+	
+	#if defined(__AVR_ATmega2560__)
+	if (val == 1){
+		set_bit(PORTB, PB0);
+	}
+	else if (val == 0){
+		clear_bit(PORTB, PB0);
+	}
+	#endif
+	
 }

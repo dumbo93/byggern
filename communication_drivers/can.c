@@ -10,14 +10,24 @@
 
 enum interrupt_flags interrupt_flag = no_flag; 
 
+
 void CAN_init()
 {
 	// Interrupt pin (enable CANINTE.RXnIE)
 	MCP_write(MCP_CANINTE, MCP_RX_INT);
 	
+	#if defined(__AVR_ATmega162__)
 	// Falling edge of INT0 generates interrupt request
 	MCUCR |= (1 << ISC01) | (0 << ISC00);
 	GICR |= (1 << INT0);
+	#endif
+
+	#if defined(__AVR_ATmega2560__)
+	// Falling edge of INT2 generates interrupt request
+	EICRA |= (1 << ISC21) | (1 << ISC20);
+	// Enable external interrupts of INT2
+	EIMSK |= (1 << INT2);
+	#endif
 	
 	//Set to loop-back mode
 	MCP_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_LOOPBACK);
@@ -73,6 +83,8 @@ void CAN_handle_interrupt(can_msg *msg)
 	}
 }
 
+
+#if defined(__AVR_ATmega162__)
 ISR(INT0_vect){
 	uint8_t interrupt = MCP_read(MCP_CANINTF);
 
@@ -88,3 +100,22 @@ ISR(INT0_vect){
 	}
 	
 }
+#endif
+
+#if defined(__AVR_ATmega2560__)
+ISR(INT2_vect){
+	uint8_t interrupt = MCP_read(MCP_CANINTF);
+
+	if (interrupt & MCP_RX0IF){
+		interrupt_flag = RX0;
+		// clear CANINTF.RX0IF
+		MCP_bit_modify(MCP_CANINTF, 0x01, 0x00);
+	}
+	else if (interrupt & MCP_RX1IF){
+		interrupt_flag = RX1;
+		// clear CANINTF.RX1IF
+		MCP_bit_modify(MCP_CANINTF, 0x02, 0x00);
+	}
+	
+}
+#endif

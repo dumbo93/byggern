@@ -4,17 +4,17 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>6.2</ProjectVersion>
     <ToolchainName>com.Atmel.AVRGCC8.C</ToolchainName>
-    <ProjectGuid>{4a753e5f-6c1c-4c27-a313-85c03fbc3986}</ProjectGuid>
-    <avrdevice>ATmega162</avrdevice>
+    <ProjectGuid>{03cee202-2480-42cb-a473-5a23daae5f91}</ProjectGuid>
+    <avrdevice>ATmega2560</avrdevice>
     <avrdeviceseries>none</avrdeviceseries>
     <OutputType>Executable</OutputType>
     <Language>C</Language>
     <OutputFileName>$(MSBuildProjectName)</OutputFileName>
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
-    <AssemblyName>ATmega162</AssemblyName>
-    <Name>ATmega162</Name>
-    <RootNamespace>ATmega162</RootNamespace>
+    <AssemblyName>ATmega2560</AssemblyName>
+    <Name>ATmega2560</Name>
+    <RootNamespace>ATmega2560</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
@@ -55,6 +55,7 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
       <AvrGcc>
+        <avrgcc.common.optimization.RelaxBranches>True</avrgcc.common.optimization.RelaxBranches>
         <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
         <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
         <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
@@ -82,6 +83,7 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <ToolchainSettings>
       <AvrGcc>
+        <avrgcc.common.optimization.RelaxBranches>True</avrgcc.common.optimization.RelaxBranches>
         <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
         <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
         <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
@@ -141,52 +143,7 @@
       <SubType>compile</SubType>
       <Link>src\communication_drivers\uart.h</Link>
     </Compile>
-    <Compile Include="src\bit_manipulation.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\drivers\adc.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\drivers\adc.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\drivers\font_normal.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\drivers\joystick.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\drivers\joystick.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\drivers\oled.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\drivers\oled.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\drivers\sram.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\drivers\sram.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\drivers\touch_panel.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\drivers\touch_panel.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\main.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\memory_mapping.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\menu.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\menu.h">
+    <Compile Include="src\ATmega2560.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\setup.h">
@@ -195,7 +152,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src" />
-    <Folder Include="src\drivers" />
     <Folder Include="src\communication_drivers" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
