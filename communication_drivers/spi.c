@@ -10,8 +10,6 @@
 
 void SPI_init( void )
 {
-	// Enable SPI, Master, set clock rate
-	SPCR = (1 << SPE)|(1 << MSTR)|(1 << SPR0);
 	// Set MOSI, SCK and SS output
 	#if defined(__AVR_ATmega162__)
 	DDRB |= (1 << DDB5)|(1 << DDB7)|(1 << DDB4);
@@ -19,6 +17,9 @@ void SPI_init( void )
 	#if defined(__AVR_ATmega2560__)
 	DDRB |= (1 << DDB2)|(1 << DDB1)|(1 << DDB0) | (1 << DDB7);
 	#endif
+	
+	// Enable SPI, Master, set clock rate
+	SPCR = (1 << SPE)|(1 << MSTR)|(1 << SPR0);
 }
 
 uint8_t SPI_transmit_receive(uint8_t data)

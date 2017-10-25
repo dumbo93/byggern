@@ -41,7 +41,7 @@ int main( void ){
 	send.id = ATmega162_ID;
 	send.length = 4;
 	send.data[0] = 'H';
-	send.data[1] = 'e';
+	send.data[1] = 'o';
 	send.data[2] = 'l';
 	send.data[3] = '\0';
 	can_msg receive;

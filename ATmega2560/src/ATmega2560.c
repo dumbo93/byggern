@@ -24,6 +24,7 @@ int main( void ){
 	SPI_init();
 	MCP_init();
 	CAN_init();
+	//while(1){printf("\n\n\nInit done\n");}
 	printf("\n\n\nInit done\n");
 	sei();
 	can_msg send;
@@ -36,15 +37,18 @@ int main( void ){
 	can_msg receive;
 	
 	while(1){
-		//printf("While loop\n");
-		CAN_msg_send(&send);
+		printf("While loop\n");
+		//CAN_msg_send(&send);
 		//printf("Message sent\n");
 		_delay_us(200);
-		CAN_handle_interrupt(&receive);
+		//CAN_handle_interrupt(&receive);
 		//printf("Message received\n");
-		printf("\n\nSent message: %s \t Received message: %s \n", send.data, receive.data);
-		printf("Sent id: %d \t Received id: %d \n", send.id, receive.id);
-		printf("Sent length: %d \t Received length: %d \n", send.length, receive.length);
+		//printf("\n\nSent message: %s \t Received message: %s \n", send.data, receive.data);
+		//printf("Sent id: %d \t Received id: %d \n", send.id, receive.id);
+		//printf("Sent length: %d \t Received length: %d \n", send.length, receive.length);
+		printf("\n\nSent message: %s \n", send.data);
+		printf("Sent id: %d \n", send.id);
+		printf("Sent length: %d  \n", send.length);
 		_delay_ms(2000);
 	}
 	

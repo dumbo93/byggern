@@ -16,7 +16,7 @@
 
 #include "uart.h"
 #include <avr/io.h>
-//#include <stdio.h>
+#include <stdio.h>
 #include <util/delay.h>
 
 
@@ -73,7 +73,7 @@ void UART_Transmit (unsigned char data)
 unsigned char UART_Recieve (void)
 {
 	//Wait for data to be received
-	while(!(UCSR0A) & (1<<RXC0));  
+	while(!(UCSR0A & (1<<RXC0)));  
 	
 	//Get and return received data from buffer
 	return UDR0;  
