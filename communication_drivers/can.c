@@ -7,12 +7,35 @@
 #include "can.h"
 #include "MCP2515.h"
 #include <avr/interrupt.h>
+#include "uart.h"
 
 enum interrupt_flags interrupt_flag = no_flag; 
 
 
 void CAN_init()
 {
+	// Turn mask/filters off
+	MCP_bit_modify(MCP_RXB0CTRL, MCP_FILTER_OFF, MCP_FILTER_OFF);
+	MCP_bit_modify(MCP_RXB1CTRL, MCP_FILTER_OFF, MCP_FILTER_OFF);
+	
+	// Rollover enable
+	MCP_bit_modify(MCP_RXB0CTRL, MCP_ROLLOVER, MCP_ROLLOVER);
+	MCP_bit_modify(MCP_RXB1CTRL, MCP_ROLLOVER, MCP_ROLLOVER);
+	
+	
+	
+	//Set to loop-back mode
+	//MCP_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_LOOPBACK);
+	
+	// Set to normal mode
+	MCP_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_NORMAL);
+	
+	uint8_t value = MCP_read(MCP_CANSTAT);
+	if ((value & MODE_MASK) != MODE_NORMAL){
+		printf("MCP2515 is NOT in normal mode after CAN init\n");
+		return 1;
+	}
+	
 	// Interrupt pin (enable CANINTE.RXnIE)
 	MCP_write(MCP_CANINTE, MCP_RX_INT);
 	
@@ -24,13 +47,10 @@ void CAN_init()
 
 	#if defined(__AVR_ATmega2560__)
 	// Falling edge of INT2 generates interrupt request
-	EICRA |= (1 << ISC21) | (1 << ISC20);
+	EICRA |= (1 << ISC21) | (0 << ISC20);
 	// Enable external interrupts of INT2
 	EIMSK |= (1 << INT2);
 	#endif
-	
-	//Set to loop-back mode
-	MCP_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_LOOPBACK);
 }
 
 void CAN_msg_send(can_msg *message)
@@ -69,16 +89,20 @@ void CAN_handle_interrupt(can_msg *msg)
 {
 	switch(interrupt_flag){
 		case no_flag:
+		printf("no interrupt\n");
 			break;
 		case RX0:
 			CAN_msg_receive(msg, MCP_RXB0CTRL);
 			interrupt_flag = no_flag;
+			printf("interrupt handled\n");
 			break;
 		case RX1:
 			CAN_msg_receive(msg, MCP_RXB1CTRL);
 			interrupt_flag = no_flag;
+			printf("interrupt handled\n");
 			break;
 		default:
+		printf("no interrupt\n");
 			break;
 	}
 }

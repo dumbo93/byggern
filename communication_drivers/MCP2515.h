@@ -181,6 +181,10 @@ Copyright 2003 Kimberly Otten Software Consulting
 #define MCP_WAKIF		0x40
 #define MCP_MERRF		0x80
 
+// RXBnCTRL register values
+#define MCP_FILTER_OFF	0x60
+#define MCP_ROLLOVER	0x04
+
 
 
 /* Authors: Stine Dombu, Ingunn Vallestad */

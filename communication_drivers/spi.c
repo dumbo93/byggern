@@ -12,13 +12,12 @@ void SPI_init( void )
 {
 	// Enable SPI, Master, set clock rate
 	SPCR = (1 << SPE)|(1 << MSTR)|(1 << SPR0);
-	
 	// Set MOSI, SCK and SS output
 	#if defined(__AVR_ATmega162__)
-	DDRB = (1 << DDB5)|(1 << DDB7)|(1 << DDB4);
+	DDRB |= (1 << DDB5)|(1 << DDB7)|(1 << DDB4);
 	#endif
 	#if defined(__AVR_ATmega2560__)
-	DDRB = (1 << DDB2)|(1 << DDB1)|(1 << DDB0);
+	DDRB |= (1 << DDB2)|(1 << DDB1)|(1 << DDB0) | (1 << DDB7);
 	#endif
 }
 
@@ -48,10 +47,10 @@ void SPI_set_ss( int val )
 	
 	#if defined(__AVR_ATmega2560__)
 	if (val == 1){
-		set_bit(PORTB, PB0);
+		set_bit(PORTB, PB7);
 	}
 	else if (val == 0){
-		clear_bit(PORTB, PB0);
+		clear_bit(PORTB, PB7);
 	}
 	#endif
 	

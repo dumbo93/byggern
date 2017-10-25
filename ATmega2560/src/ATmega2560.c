@@ -26,7 +26,13 @@ int main( void ){
 	CAN_init();
 	printf("\n\n\nInit done\n");
 	sei();
-	can_msg send = {.id = 3, .length = 1, .data[0] = 200};
+	can_msg send;
+	send.id = ATmega2560_ID;
+	send.length = 4;
+	send.data[0] = 'H';
+	send.data[1] = 'e';
+	send.data[2] = 'i';
+	send.data[3] = '\0';
 	can_msg receive;
 	
 	while(1){
@@ -36,7 +42,7 @@ int main( void ){
 		_delay_us(200);
 		CAN_handle_interrupt(&receive);
 		//printf("Message received\n");
-		printf("\n\nSent message: %d \t Received message: %d \n", send.data[0], receive.data[0]);
+		printf("\n\nSent message: %s \t Received message: %s \n", send.data, receive.data);
 		printf("Sent id: %d \t Received id: %d \n", send.id, receive.id);
 		printf("Sent length: %d \t Received length: %d \n", send.length, receive.length);
 		_delay_ms(2000);
