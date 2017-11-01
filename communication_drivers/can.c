@@ -89,8 +89,8 @@ void CAN_msg_receive(can_msg *msg, uint8_t reg)
 
 void CAN_handle_interrupt(can_msg *msg)
 {
-	printf("EFLG: %x\n", MCP_read(MCP_EFLG));
-	printf("RXB0CTRL: %x\n", MCP_read(MCP_RXB0CTRL));
+	//printf("EFLG: %x\n", MCP_read(MCP_EFLG));
+	//printf("RXB0CTRL: %x\n", MCP_read(MCP_RXB0CTRL));
 	switch(interrupt_flag){
 		case no_flag:
 		printf("no interrupt 1\n");

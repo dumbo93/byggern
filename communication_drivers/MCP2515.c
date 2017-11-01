@@ -8,6 +8,7 @@
 #include "MCP2515.h"
 #include "spi.h"
 #include "uart.h"
+#include <util/delay.h>
 
 
 uint8_t MCP_init( void )
@@ -19,7 +20,7 @@ uint8_t MCP_init( void )
 	
 	uint8_t value = MCP_read(MCP_CANSTAT);
 	//printf("hello from MCP init 3\n");
-	//printf("Value = %02X\n", value);
+	printf("Value = %X\n", value);
 	if ((value & MODE_MASK) != MODE_CONFIG){
 		printf("MCP2515 is NOT in configuration mode after reset\n");
 		return 1;
@@ -34,6 +35,7 @@ void MCP_reset( void )
 	SPI_set_ss(0);
 	// Send reset instruction
 	SPI_transmit_receive(MCP_RESET);
+	_delay_us(200);
 	SPI_set_ss(1);
 }
 

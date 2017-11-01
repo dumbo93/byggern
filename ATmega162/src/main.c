@@ -61,7 +61,7 @@ int main( void ){
 		//printf("Sent length: %d \n", send.length);
 		
 		JOY2CAN_send_pos();
-		_delay_ms(2000);
+		_delay_ms(500);
 	}
 	
 	

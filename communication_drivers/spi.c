@@ -7,6 +7,7 @@
 #include "spi.h"
 #include "../ATmega162/src/bit_manipulation.h"
 #include <avr/io.h>
+#include <avr/delay.h>
 
 void SPI_init( void )
 {
@@ -19,7 +20,9 @@ void SPI_init( void )
 	#endif
 	
 	// Enable SPI, Master, set clock rate
-	SPCR = (1 << SPE)|(1 << MSTR)|(1 << SPR0);
+	SPCR = (1 << MSTR)|(1 << SPR0);
+	
+	SPCR |= (1 << SPE);
 }
 
 uint8_t SPI_transmit_receive(uint8_t data)
@@ -31,7 +34,9 @@ uint8_t SPI_transmit_receive(uint8_t data)
 	while(!(SPSR & (1 << SPIF)));
 	//printf("Hello from SPI transmit receive 2\n");
 	
+	_delay_us(200);
 	return SPDR;
+	
 }
 
 // Set _SS to 1 or 0
