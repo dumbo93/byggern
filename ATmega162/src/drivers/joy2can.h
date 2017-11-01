@@ -9,8 +9,8 @@
 #ifndef JOY2CAN_H_
 #define JOY2CAN_H_
 
-
-
-
+#define NEGATIVE 0
+#define POSITIVE 1
+void JOY2CAN_send_pos();
 
 #endif /* JOY2CAN_H_ */

@@ -50,3 +50,8 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Atmel studio
+*.eep
+*.lss
+*.srec

@@ -12,7 +12,7 @@
 enum interrupt_flags interrupt_flag = no_flag; 
 
 
-void CAN_init()
+int CAN_init()
 {
 	// Turn mask/filters off
 	MCP_bit_modify(MCP_RXB0CTRL, MCP_FILTER_OFF, MCP_FILTER_OFF);
@@ -36,6 +36,7 @@ void CAN_init()
 		return 1;
 	}
 	
+	
 	// Interrupt pin (enable CANINTE.RXnIE)
 	MCP_write(MCP_CANINTE, MCP_RX_INT);
 	
@@ -51,6 +52,7 @@ void CAN_init()
 	// Enable external interrupts of INT2
 	EIMSK |= (1 << INT2);
 	#endif
+	return 0;
 }
 
 void CAN_msg_send(can_msg *message)
@@ -87,8 +89,8 @@ void CAN_msg_receive(can_msg *msg, uint8_t reg)
 
 void CAN_handle_interrupt(can_msg *msg)
 {
-	printf("EFLG: %c\n", MCP_EFLG);
-	printf("RXB0CTRL: %c\n", MCP_RXB0CTRL);
+	printf("EFLG: %x\n", MCP_read(MCP_EFLG));
+	printf("RXB0CTRL: %x\n", MCP_read(MCP_RXB0CTRL));
 	switch(interrupt_flag){
 		case no_flag:
 		printf("no interrupt 1\n");
