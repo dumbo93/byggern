@@ -11,6 +11,7 @@
 #include "drivers/joystick.h"
 #include "drivers/touch_panel.h"
 #include "drivers/oled.h"
+#include "drivers/joy2can.h"
 #include "../../communication_drivers/uart.h"
 #include "../../communication_drivers/spi.h"
 #include "../../communication_drivers/MCP2515.h"
@@ -61,7 +62,7 @@ int main( void ){
 		//printf("Sent length: %d \n", send.length);
 		
 		JOY2CAN_send_pos();
-		_delay_ms(500);
+		_delay_ms(50);
 	}
 	
 	

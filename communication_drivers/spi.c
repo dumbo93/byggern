@@ -7,7 +7,7 @@
 #include "spi.h"
 #include "../ATmega162/src/bit_manipulation.h"
 #include <avr/io.h>
-#include <avr/delay.h>
+#include <util/delay.h>
 
 void SPI_init( void )
 {

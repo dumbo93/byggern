@@ -12,6 +12,8 @@
 
 src\drivers\adc.c
 
+src\drivers\joy2can.c
+
 src\drivers\joystick.c
 
 src\drivers\oled.c

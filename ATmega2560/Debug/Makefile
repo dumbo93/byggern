@@ -34,7 +34,8 @@ LINKER_SCRIPT_DEP:=
 # Every subdirectory with source files must be described here
 SUBDIRS :=  \
 ../src \
-../src/communication_drivers
+../src/communication_drivers \
+../src/drivers
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
@@ -43,7 +44,9 @@ C_SRCS +=  \
 ../../communication_drivers/MCP2515.c \
 ../../communication_drivers/spi.c \
 ../../communication_drivers/uart.c \
-../src/ATmega2560.c
+../src/ATmega2560.c \
+../src/drivers/counter.c \
+../src/drivers/servo.c
 
 
 PREPROCESSING_SRCS += 
@@ -57,28 +60,36 @@ src/communication_drivers/can.o \
 src/communication_drivers/MCP2515.o \
 src/communication_drivers/spi.o \
 src/communication_drivers/uart.o \
-src/ATmega2560.o
+src/ATmega2560.o \
+src/drivers/counter.o \
+src/drivers/servo.o
 
 OBJS_AS_ARGS +=  \
 src/communication_drivers/can.o \
 src/communication_drivers/MCP2515.o \
 src/communication_drivers/spi.o \
 src/communication_drivers/uart.o \
-src/ATmega2560.o
+src/ATmega2560.o \
+src/drivers/counter.o \
+src/drivers/servo.o
 
 C_DEPS +=  \
 src/communication_drivers/can.d \
 src/communication_drivers/MCP2515.d \
 src/communication_drivers/spi.d \
 src/communication_drivers/uart.d \
-src/ATmega2560.d
+src/ATmega2560.d \
+src/drivers/counter.d \
+src/drivers/servo.d
 
 C_DEPS_AS_ARGS +=  \
 src/communication_drivers/can.d \
 src/communication_drivers/MCP2515.d \
 src/communication_drivers/spi.d \
 src/communication_drivers/uart.d \
-src/ATmega2560.d
+src/ATmega2560.d \
+src/drivers/counter.d \
+src/drivers/servo.d
 
 OUTPUT_FILE_PATH +=ATmega2560.elf
 
@@ -105,6 +116,10 @@ LINKER_SCRIPT_DEP+=
 
 
 
+
+
+
+
 src/communication_drivers/%.o: ../../communication_drivers/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
@@ -113,6 +128,13 @@ src/communication_drivers/%.o: ../../communication_drivers/%.c
 	
 
 src/%.o: ../src/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+src/drivers/%.o: ../src/drivers/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

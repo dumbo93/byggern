@@ -19,12 +19,12 @@ void COUNTER_init()
 	TCCR1A |= (1 << WGM11) | (0 << WGM10);
 	
 	// Set prescaler to 1/8
-	TCCR1B |= (0 << CS12) | (1 << CS11) | (0 << CS10);
+	TCCR1B |= (0 << CS12) | (1 << CS11) | (1 << CS10);
 	
 	// Set TOP
 	// frequency = 50 Hz
 	// trekke fra 1?
-	ICR1 = F_CPU/(8*50);
+	ICR1 = F_CPU/(64*50);
 	
 	// Set OC1A to output
 	DDRB |= (1 << DDB5);
@@ -32,6 +32,6 @@ void COUNTER_init()
 
 void COUNTER_set_pulse_width(float pulse_width_ms)
 {
-	float pulse_width_s = pulse_width_ms/1000;
-	OCR1A = F_CPU/8 * pulse_width_s;
+	//float pulse_width_s = pulse_width_ms/1000;
+	OCR1A = F_CPU/64/1000 * pulse_width_ms;
 }

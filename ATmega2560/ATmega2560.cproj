@@ -146,6 +146,18 @@
     <Compile Include="src\ATmega2560.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\drivers\counter.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\drivers\counter.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\drivers\servo.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\drivers\servo.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\setup.h">
       <SubType>compile</SubType>
     </Compile>
@@ -153,6 +165,7 @@
   <ItemGroup>
     <Folder Include="src" />
     <Folder Include="src\communication_drivers" />
+    <Folder Include="src\drivers" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>

@@ -153,6 +153,12 @@
     <Compile Include="src\drivers\font_normal.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\drivers\joy2can.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\drivers\joy2can.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\drivers\joystick.c">
       <SubType>compile</SubType>
     </Compile>

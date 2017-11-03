@@ -30,7 +30,7 @@ int main( void ){
 	//printf("MCP\n");
 	CAN_init();
 	//printf("CAN\n");
-	//COUNTER_init();
+	COUNTER_init();
 	//printf("COUNTER\n");
 	////while(1){printf("\n\n\nInit done\n");}
 	printf("\n\n\nInit done\n");
@@ -59,11 +59,11 @@ int main( void ){
 		//printf("\n\nSent message: %s \t Received message: %s \n", send.data, receive.data);
 		//printf("Sent id: %d \t Received id: %d \n", send.id, receive.id);
 		//printf("Sent length: %d \t Received length: %d \n", send.length, receive.length);
-		//printf("\n\nReceived message (x, y): %d (%d, %d) %d \n",receive.data[0], receive.data[1], receive.data[3], receive.data[2] );
-		//printf("Received id: %d \n", receive.id);
-		//printf("Received length: %d  \n", receive.length);
-		//SERVO_set_position(receive.data[0], receive.data[1]);
-		_delay_ms(500);
+		printf("\n\nReceived message (x, y): (%d, %d) \n",receive.data[0], receive.data[1]);
+		printf("Received id: %d \n", receive.id);
+		printf("Received length: %d  \n", receive.length);
+		SERVO_set_position(receive.data[0]);
+		_delay_ms(50);
 		
 		//value = MCP_read(MCP_CANCTRL);
 		//_delay_ms(10);

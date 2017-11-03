@@ -62,7 +62,7 @@ JOY_position_t JOY_get_position(){
 JOY_direction_t JOY_get_direction(){
 	JOY_position_t current_pos = JOY_get_position();
 	
-	if (abs(current_pos.x) < 50 && abs(current_pos.y) < 30) {
+	if (abs(current_pos.x) < 30 && abs(current_pos.y) < 30) {
 		return NEUTRAL;
 	}
 	else if (abs(current_pos.x) > abs(current_pos.y)){

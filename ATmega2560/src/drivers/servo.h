@@ -19,6 +19,6 @@
 
 #include <avr/io.h>
 
-void SERVO_set_position(uint8_t sign, uint8_t pos);
+void SERVO_set_position(uint8_t pos);
 
 #endif /* SERVO_H_ */
