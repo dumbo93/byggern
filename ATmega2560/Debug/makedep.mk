@@ -12,7 +12,13 @@
 
 src\ATmega2560.c
 
+src\count_score.c
+
+src\drivers\adc_2560.c
+
 src\drivers\counter.c
+
+src\drivers\ir.c
 
 src\drivers\servo.c
 

@@ -29,12 +29,14 @@ int main( void ){
 	ADC_init();
 	
 	JOY_init();
-	//TOUCH_init();
-	//OLED_init();
-	//MENU_init();
+	TOUCH_init();
+	OLED_init();
+	MENU_init();
+	
 	SPI_init();
 	MCP_init();
 	CAN_init();
+	
 	printf("\n\n\nInit done\n");
 	sei();
 	//can_msg send = {.id = 1, .length = 1, .data = 130};

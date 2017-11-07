@@ -45,7 +45,10 @@ C_SRCS +=  \
 ../../communication_drivers/spi.c \
 ../../communication_drivers/uart.c \
 ../src/ATmega2560.c \
+../src/count_score.c \
+../src/drivers/adc_2560.c \
 ../src/drivers/counter.c \
+../src/drivers/ir.c \
 ../src/drivers/servo.c
 
 
@@ -61,7 +64,10 @@ src/communication_drivers/MCP2515.o \
 src/communication_drivers/spi.o \
 src/communication_drivers/uart.o \
 src/ATmega2560.o \
+src/count_score.o \
+src/drivers/adc_2560.o \
 src/drivers/counter.o \
+src/drivers/ir.o \
 src/drivers/servo.o
 
 OBJS_AS_ARGS +=  \
@@ -70,7 +76,10 @@ src/communication_drivers/MCP2515.o \
 src/communication_drivers/spi.o \
 src/communication_drivers/uart.o \
 src/ATmega2560.o \
+src/count_score.o \
+src/drivers/adc_2560.o \
 src/drivers/counter.o \
+src/drivers/ir.o \
 src/drivers/servo.o
 
 C_DEPS +=  \
@@ -79,7 +88,10 @@ src/communication_drivers/MCP2515.d \
 src/communication_drivers/spi.d \
 src/communication_drivers/uart.d \
 src/ATmega2560.d \
+src/count_score.d \
+src/drivers/adc_2560.d \
 src/drivers/counter.d \
+src/drivers/ir.d \
 src/drivers/servo.d
 
 C_DEPS_AS_ARGS +=  \
@@ -88,7 +100,10 @@ src/communication_drivers/MCP2515.d \
 src/communication_drivers/spi.d \
 src/communication_drivers/uart.d \
 src/ATmega2560.d \
+src/count_score.d \
+src/drivers/adc_2560.d \
 src/drivers/counter.d \
+src/drivers/ir.d \
 src/drivers/servo.d
 
 OUTPUT_FILE_PATH +=ATmega2560.elf
@@ -105,6 +120,12 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
+
+
+
+
 
 
 

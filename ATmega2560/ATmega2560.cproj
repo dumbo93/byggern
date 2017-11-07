@@ -146,10 +146,28 @@
     <Compile Include="src\ATmega2560.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\count_score.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\count_score.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\drivers\adc_2560.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\drivers\adc_2560.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\drivers\counter.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\drivers\counter.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\drivers\ir.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\drivers\ir.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\drivers\servo.c">
