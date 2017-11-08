@@ -45,7 +45,7 @@ C_SRCS +=  \
 ../../communication_drivers/spi.c \
 ../../communication_drivers/uart.c \
 ../src/drivers/adc.c \
-../src/drivers/joy2can.c \
+../src/drivers/send2can.c \
 ../src/drivers/joystick.c \
 ../src/drivers/oled.c \
 ../src/drivers/sram.c \
@@ -66,7 +66,7 @@ src/communication_drivers/MCP2515.o \
 src/communication_drivers/spi.o \
 src/communication_drivers/uart.o \
 src/drivers/adc.o \
-src/drivers/joy2can.o \
+src/drivers/send2can.o \
 src/drivers/joystick.o \
 src/drivers/oled.o \
 src/drivers/sram.o \
@@ -80,7 +80,7 @@ src/communication_drivers/MCP2515.o \
 src/communication_drivers/spi.o \
 src/communication_drivers/uart.o \
 src/drivers/adc.o \
-src/drivers/joy2can.o \
+src/drivers/send2can.o \
 src/drivers/joystick.o \
 src/drivers/oled.o \
 src/drivers/sram.o \
@@ -94,7 +94,7 @@ src/communication_drivers/MCP2515.d \
 src/communication_drivers/spi.d \
 src/communication_drivers/uart.d \
 src/drivers/adc.d \
-src/drivers/joy2can.d \
+src/drivers/send2can.d \
 src/drivers/joystick.d \
 src/drivers/oled.d \
 src/drivers/sram.d \
@@ -108,7 +108,7 @@ src/communication_drivers/MCP2515.d \
 src/communication_drivers/spi.d \
 src/communication_drivers/uart.d \
 src/drivers/adc.d \
-src/drivers/joy2can.d \
+src/drivers/send2can.d \
 src/drivers/joystick.d \
 src/drivers/oled.d \
 src/drivers/sram.d \

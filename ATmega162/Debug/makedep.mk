@@ -12,7 +12,7 @@
 
 src\drivers\adc.c
 
-src\drivers\joy2can.c
+src\drivers\send2can.c
 
 src\drivers\joystick.c
 

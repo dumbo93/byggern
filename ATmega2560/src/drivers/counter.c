@@ -32,6 +32,5 @@ void COUNTER_init()
 
 void COUNTER_set_pulse_width(float pulse_width_ms)
 {
-	//float pulse_width_s = pulse_width_ms/1000;
 	OCR1A = F_CPU/64/1000 * pulse_width_ms;
 }

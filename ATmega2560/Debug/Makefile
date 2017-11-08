@@ -49,7 +49,10 @@ C_SRCS +=  \
 ../src/drivers/adc_2560.c \
 ../src/drivers/counter.c \
 ../src/drivers/ir.c \
-../src/drivers/servo.c
+../src/drivers/motor.c \
+../src/drivers/twi_handler.c \
+../src/drivers/servo.c \
+../src/drivers/TWI_Master.c
 
 
 PREPROCESSING_SRCS += 
@@ -68,7 +71,10 @@ src/count_score.o \
 src/drivers/adc_2560.o \
 src/drivers/counter.o \
 src/drivers/ir.o \
-src/drivers/servo.o
+src/drivers/motor.o \
+src/drivers/twi_handler.o \
+src/drivers/servo.o \
+src/drivers/TWI_Master.o
 
 OBJS_AS_ARGS +=  \
 src/communication_drivers/can.o \
@@ -80,7 +86,10 @@ src/count_score.o \
 src/drivers/adc_2560.o \
 src/drivers/counter.o \
 src/drivers/ir.o \
-src/drivers/servo.o
+src/drivers/motor.o \
+src/drivers/twi_handler.o \
+src/drivers/servo.o \
+src/drivers/TWI_Master.o
 
 C_DEPS +=  \
 src/communication_drivers/can.d \
@@ -92,7 +101,10 @@ src/count_score.d \
 src/drivers/adc_2560.d \
 src/drivers/counter.d \
 src/drivers/ir.d \
-src/drivers/servo.d
+src/drivers/motor.d \
+src/drivers/twi_handler.d \
+src/drivers/servo.d \
+src/drivers/TWI_Master.d
 
 C_DEPS_AS_ARGS +=  \
 src/communication_drivers/can.d \
@@ -104,7 +116,10 @@ src/count_score.d \
 src/drivers/adc_2560.d \
 src/drivers/counter.d \
 src/drivers/ir.d \
-src/drivers/servo.d
+src/drivers/motor.d \
+src/drivers/twi_handler.d \
+src/drivers/servo.d \
+src/drivers/TWI_Master.d
 
 OUTPUT_FILE_PATH +=ATmega2560.elf
 
@@ -120,6 +135,12 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
+
+
+
+
 
 
 
