@@ -21,8 +21,6 @@ void SEND2CAN_send_joy_pos_x()
 	msg.length = 2;
 	CAN_msg_send(&msg);
 	printf("\n\nSent joystick position (x): (%d) \n",msg.data[1]);
-	printf("Sent id: %d \n", msg.id);
-	printf("Sent length: %d  \n", msg.length);
 }
 
 void SEND2CAN_send_slider_pos()

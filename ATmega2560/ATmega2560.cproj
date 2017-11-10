@@ -146,6 +146,12 @@
     <Compile Include="src\ATmega2560.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\controller.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\controller.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\count_score.c">
       <SubType>compile</SubType>
     </Compile>

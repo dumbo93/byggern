@@ -27,6 +27,5 @@ void TWI_send_address_and_data(uint8_t *message, int message_length)
 		message_buffer[i+2] = message[i];
 		printf("%d ", message_buffer[i+2]);
 	}
-	printf("\n");
 	TWI_Start_Transceiver_With_Data(message_buffer, message_length + 2);
 }
