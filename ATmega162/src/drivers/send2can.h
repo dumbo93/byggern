@@ -13,5 +13,6 @@
 #define POSITIVE 1
 void SEND2CAN_send_joy_pos_x();
 void SEND2CAN_send_slider_pos();
+void SEND2CAN_touch_button_pressed();
 
 #endif /* SEND2CAN_H_ */

@@ -93,20 +93,20 @@ void CAN_handle_interrupt(can_msg *msg)
 	//printf("RXB0CTRL: %x\n", MCP_read(MCP_RXB0CTRL));
 	switch(interrupt_flag){
 		case no_flag:
-		printf("no interrupt 1\n");
+		//printf("no interrupt 1\n");
 			break;
 		case RX0:
 			CAN_msg_receive(msg, MCP_RXB0CTRL);
 			interrupt_flag = no_flag;
-			printf("interrupt handled 1\n");
+			//printf("interrupt handled 1\n");
 			break;
 		case RX1:
 			CAN_msg_receive(msg, MCP_RXB1CTRL);
 			interrupt_flag = no_flag;
-			printf("interrupt handled 2\n");
+			//printf("interrupt handled 2\n");
 			break;
 		default:
-		printf("no interrupt 2\n");
+		//printf("no interrupt 2\n");
 			break;
 	}
 }

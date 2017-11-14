@@ -20,6 +20,7 @@
 #include "count_score.h"
 #include "controller.h"
 
+#include <stdlib.h>
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
@@ -44,52 +45,42 @@ int main( void ){
 	int msg_type;
 	uint8_t twi_message[1];
 	int16_t velocity;
-	uint8_t encoder_pos;
-	uint8_t y;
-	uint8_t u;
-	uint8_t reference;
+	float encoder_pos;
+	float y;
+	float u;
+	float reference;
+	uint8_t prev_data = 0;
 	
 	while(1){
 		CAN_handle_interrupt(&receive);
 		
 		msg_type = receive.data[0];
 		switch(msg_type){
-			case CAN_SLIDER_POS_R:
-				//printf("\n\nReceived slider position: (%d) \n",receive.data[1]);
-				SERVO_set_position(receive.data[1]);
+			case CAN_JOY_POS_X:
+				if (receive.data[1] != prev_data){
+					//printf("\n\nReceived slider position: (%d) \n",receive.data[1]);
+					SERVO_set_position(receive.data[1]);
+					prev_data=receive.data[1];
+				}
 
 				break;
-			case CAN_JOY_POS_X:
+			case CAN_SLIDER_POS_R:
 				//printf("\n\nReceived joystick pos (x): (%d) \n", receive.data[1]);
-				//reference =(float)receive.data[1];
+				reference =(float)receive.data[1];
 				//printf("\t\t\t Received data before: %d\n", receive.data[1]);
-				//printf("\t\t\t Reference before: %d\n", reference);
+				//printf("\t\t\t Reference before: %d\n", (int)reference);
 				reference = CONTROLLER_set_reference(receive.data[1]);
-				//printf("\t\t\t Reference after: %d\n", reference);
-				
-				
-				
-				//velocity = receive.data[1] - 127;
-				//if (velocity < 0){
-					////retning venstre 
-					//MOTOR_set_dir(0);
-					//velocity = abs(velocity);
-					//MOTOR_set_velocity((uint8_t)velocity);
-				//}
-				//else{
-					////retning høyre
-					//MOTOR_set_dir(1);
-					//MOTOR_set_velocity((uint8_t)velocity);
-				//}
+				//printf("\t\t\t Reference after: %d\n", (int)reference);
 				break;
-				
+			case CAN_TOUCH_BUTTON:
+				//solenoid
 		}
 		y = MOTOR_read_scaled_encoder();
-		
+		if (y < 0){ y = 0; }
 		u = CONTROLLER_run(y, reference);
 		MOTOR_set_dir(y > reference);
-		printf("\t\t\t Reference: %d\n", reference);
-		printf("\t\t\t Received data: %d\n", receive.data[1]);
+		//printf("\t\t\t Reference: %.1f\n", (int)reference);
+		//printf("\t\t\t Received data: %d\n", receive.data[1]);
 		MOTOR_set_velocity(u);		
 		
 
@@ -98,7 +89,7 @@ int main( void ){
 		//printf("\nAvg IR signal: %d\n\n", value);
 		//COUNT_SCORE_get();
 		
-		_delay_ms(5);
+		_delay_us(500);
 		
 	}
 	

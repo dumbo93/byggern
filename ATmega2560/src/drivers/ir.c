@@ -12,7 +12,7 @@ uint8_t IR_read()
 {
 	static uint8_t values[4];
 	values[0] = ADC_read_2560();
-	printf("ADC value: %d\n", values[0]);
+	//printf("ADC value: %d\n", values[0]);
 	int avg = 0;
 	for (int i = 3; i >= 0; i--){
 		avg = avg + values[i];

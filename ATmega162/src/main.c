@@ -64,9 +64,10 @@ int main( void ){
 		//printf("Sent length: %d \n", send.length);
 		
 		SEND2CAN_send_joy_pos_x();
-		_delay_ms(500);
+		_delay_ms(50);
 		SEND2CAN_send_slider_pos();
-		_delay_ms(500);
+		_delay_ms(50);
+		SEND2CAN_touch_button_pressed();
 	}
 	
 	

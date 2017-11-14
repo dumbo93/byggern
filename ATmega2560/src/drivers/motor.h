@@ -15,6 +15,7 @@ void MOTOR_find_limits( void );
 void MOTOR_set_dir(int dir);
 void MOTOR_set_velocity(uint8_t vel);
 int16_t MOTOR_read_encoder(void);
+float MOTOR_read_scaled_encoder();
 
 
 #endif /* MOTOR_H_ */

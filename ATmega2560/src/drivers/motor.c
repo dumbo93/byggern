@@ -111,7 +111,7 @@ int16_t MOTOR_read_encoder(void)
 	
 	// Process received data
 	int16_t total_encoder_value = encoder_value_MSB << 8 | encoder_value_LSB;
-	printf("\tEncoder value: %x\n", total_encoder_value);
+	//printf("\tEncoder value: %x\n", total_encoder_value);
 	
 	return total_encoder_value;
 	
@@ -121,6 +121,6 @@ float MOTOR_read_scaled_encoder()
 {
 	float encoder_value = (float)MOTOR_read_encoder()/MOTOR_max_encoder_value * 255; //Scaled between 0 and 255
 	//encoder_value = abs(encoder_value - 255.0); // 255 is rightmost position, 0 is leftmost position
-	printf("\tScaled encoder value: %d\n", (int)encoder_value);
+	//printf("\tScaled encoder value: %d\n", (int)encoder_value);
 	return encoder_value;
 }

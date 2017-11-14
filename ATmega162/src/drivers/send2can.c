@@ -35,3 +35,21 @@ void SEND2CAN_send_slider_pos()
 	CAN_msg_send(&msg);
 	printf("\n\nSent slider position: (%d) \n",msg.data[1]);
 }
+
+void SEND2CAN_touch_button_pressed()
+{
+	static int prev_button_pressed;
+	can_msg msg;
+	
+	int button_pressed = TOUCH_button();
+	if(button_pressed != prev_button_pressed){
+		msg.id = ATmega162_ID;
+		msg.data[0] = CAN_TOUCH_BUTTON;
+		msg.data[1] = button_pressed;
+		msg.length = 2;
+		CAN_msg_send(&msg);
+		printf("\n\nSent button press (x): (%d) \n",msg.data[1]);
+		prev_button_pressed = button_pressed;
+	}
+	
+}

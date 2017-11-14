@@ -22,10 +22,10 @@ void TWI_send_address_and_data(uint8_t *message, int message_length)
 	
 	message_buffer[0] = TWI_target_slave_address;
 	message_buffer[1] = 0x00;
-	printf("Message to twi: ");
+	//printf("Message to twi: ");
 	for (int i = 0; i < message_length; i++){
 		message_buffer[i+2] = message[i];
-		printf("%d ", message_buffer[i+2]);
+		//printf("%d ", message_buffer[i+2]);
 	}
 	TWI_Start_Transceiver_With_Data(message_buffer, message_length + 2);
 }

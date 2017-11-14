@@ -24,11 +24,11 @@ enum interrupt_flags {no_flag, RX0, RX1};
 
 // Message types
 #define CAN_JOY_POS_X		0
-#define CAN_BUTTON			1
+#define CAN_JOY_BUTTON		1
 #define CAN_SLIDER_POS_L	2
 #define CAN_SLIDER_POS_R	3
-#define CAN_TOUCH_BUTTON_L	4
-#define CAN_TOUCH_BUTTON_R	5	
+#define CAN_TOUCH_BUTTON	4
+
 
 int CAN_init();
 void CAN_msg_send(can_msg *message);
