@@ -15,6 +15,7 @@
 #include "drivers/servo.h"
 #include "drivers/adc_2560.h"
 #include "drivers/ir.h"
+#include "drivers/solenoid.h"
 
 #include "drivers/motor.h"
 #include "count_score.h"
@@ -35,6 +36,7 @@ int main( void ){
 	COUNTER_init();
 	ADC_init_2560();
 	MOTOR_init();
+	SOLENOID_init();
 	printf("\n\n\nInit done\n");
 	sei();
 	
@@ -74,6 +76,7 @@ int main( void ){
 				break;
 			case CAN_TOUCH_BUTTON:
 				//solenoid
+				SOLENOID_pulse(1);
 		}
 		y = MOTOR_read_scaled_encoder();
 		if (y < 0){ y = 0; }

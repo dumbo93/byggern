@@ -19,16 +19,19 @@ void TOUCH_init( void ){
 	
 }
 
-int TOUCH_button( int button ){
-	switch (button) {
-		case LEFT_BUTTON:
-		if(test_bit(PINB, PB1)) { return 1; }
-		break;
-		case RIGHT_BUTTON:
-		if(test_bit(PINB, PB2)) { return 1; }
-		break;
-		default:
-		return 0;
+int TOUCH_button( void ){
+	//switch (button) {
+		//case LEFT_BUTTON:
+		//if(test_bit(PINB, PB1)) { return 1; }
+		//break;
+		//case RIGHT_BUTTON:
+		//if(test_bit(PINB, PB2)) { return 1; }
+		//break;
+		//default:
+		//return 0;
+	//}
+	if (test_bit(PINB, PB1) || test_bit(PINB, PB2)){
+		return 1;
 	}
 	return 0;
 }

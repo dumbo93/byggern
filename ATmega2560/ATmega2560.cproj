@@ -182,6 +182,12 @@
     <Compile Include="src\drivers\motor.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\drivers\solenoid.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\drivers\solenoid.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\drivers\twi_handler.c">
       <SubType>compile</SubType>
     </Compile>

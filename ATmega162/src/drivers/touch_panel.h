@@ -22,7 +22,7 @@ typedef struct TOUCH_slider_pos {
 	} TOUCH_slider_pos_t;
 
 void TOUCH_init( void );
-int TOUCH_button( int button );
+int TOUCH_button( void );
 TOUCH_slider_pos_t TOUCH_read_adc( void );
 
 // Returns int from 0 to 255

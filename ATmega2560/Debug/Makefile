@@ -51,6 +51,7 @@ C_SRCS +=  \
 ../src/drivers/counter.c \
 ../src/drivers/ir.c \
 ../src/drivers/motor.c \
+../src/drivers/solenoid.c \
 ../src/drivers/twi_handler.c \
 ../src/drivers/servo.c \
 ../src/drivers/TWI_Master.c
@@ -74,6 +75,7 @@ src/drivers/adc_2560.o \
 src/drivers/counter.o \
 src/drivers/ir.o \
 src/drivers/motor.o \
+src/drivers/solenoid.o \
 src/drivers/twi_handler.o \
 src/drivers/servo.o \
 src/drivers/TWI_Master.o
@@ -90,6 +92,7 @@ src/drivers/adc_2560.o \
 src/drivers/counter.o \
 src/drivers/ir.o \
 src/drivers/motor.o \
+src/drivers/solenoid.o \
 src/drivers/twi_handler.o \
 src/drivers/servo.o \
 src/drivers/TWI_Master.o
@@ -106,6 +109,7 @@ src/drivers/adc_2560.d \
 src/drivers/counter.d \
 src/drivers/ir.d \
 src/drivers/motor.d \
+src/drivers/solenoid.d \
 src/drivers/twi_handler.d \
 src/drivers/servo.d \
 src/drivers/TWI_Master.d
@@ -122,6 +126,7 @@ src/drivers/adc_2560.d \
 src/drivers/counter.d \
 src/drivers/ir.d \
 src/drivers/motor.d \
+src/drivers/solenoid.d \
 src/drivers/twi_handler.d \
 src/drivers/servo.d \
 src/drivers/TWI_Master.d
@@ -140,6 +145,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

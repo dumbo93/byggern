@@ -24,6 +24,8 @@ src\drivers\ir.c
 
 src\drivers\motor.c
 
+src\drivers\solenoid.c
+
 src\drivers\twi_handler.c
 
 src\drivers\servo.c
