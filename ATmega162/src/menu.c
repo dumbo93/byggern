@@ -6,12 +6,13 @@
  */ 
 
 #include "menu.h"
+#include "state_option.h"
 #include "drivers/oled.h"
 #include "drivers/joystick.h"
 
 #include <stdlib.h>
 
-menu_item_info_t main_menu, play_game, highscores, settings, noob, basic, extreme, clear_highscores, contrast_level, invert_screen;
+menu_item_info_t main_menu, play_game, highscores, settings, slow_speed, medium_speed, fast_speed, clear_highscores, contrast_level, invert_screen,contrast_low,contrast_medium,contrast_high;
 
 menu_item_info_t main_menu ={
 	//.name = malloc(20),
@@ -26,9 +27,9 @@ menu_item_info_t main_menu ={
 menu_item_info_t play_game = {
 	.name = "Play game\n",
 	.parent = &main_menu,
-	.child[0] = &noob,
-	.child[1] = &basic,
-	.child[2] = &extreme,
+	.child[0] = &slow_speed,
+	.child[1] = &medium_speed,
+	.child[2] = &fast_speed,
 	.child_num = 3,
 };
 
@@ -48,22 +49,22 @@ menu_item_info_t settings ={
 	.child_num = 3,
 };
 
-menu_item_info_t noob = {
-	.name = "N00b\n",
+menu_item_info_t slow_speed = {
+	.name = "Slow\n",
 	.parent = &play_game,
 	.child[0] = NULL,
 	.child_num = 0,
 };
 
-menu_item_info_t basic = {
-	.name = "Basic\n",
+menu_item_info_t medium_speed = {
+	.name = "Medium\n",
 	.parent = &play_game,
 	.child[0] = NULL,
 	.child_num = 0,
 };
 
-menu_item_info_t extreme = {
-	.name = "Extreme\n",
+menu_item_info_t fast_speed = {
+	.name = "Fast\n",
 	.parent = &play_game,
 	.child[0] = NULL,
 	.child_num = 0,
@@ -79,13 +80,34 @@ menu_item_info_t clear_highscores ={
 menu_item_info_t contrast_level ={
 	.name = "Contrast level\n",
 	.parent = &settings,
-	.child[0] = NULL,
-	.child_num = 0,
+	.child[0] = &contrast_low,
+	.child[1] = &contrast_medium,
+	.child[2] = &contrast_high,
+	.child_num = 3,
 };
 
 menu_item_info_t invert_screen ={
 	.name = "Invert screen\n",
 	.parent = &settings,
+	.child[0] = NULL,
+	.child_num = 0,
+};
+
+menu_item_info_t contrast_low ={
+	.name = "Low\n",
+	.parent = &contrast_level,
+	.child[0] = NULL,
+	.child_num = 0,
+};
+menu_item_info_t contrast_medium ={
+	.name = "Medium\n",
+	.parent = &contrast_level,
+	.child[0] = NULL,
+	.child_num = 0,
+};
+menu_item_info_t contrast_high ={
+	.name = "High\n",
+	.parent = &contrast_level,
 	.child[0] = NULL,
 	.child_num = 0,
 };
@@ -102,12 +124,8 @@ void MENU_init( void ){
 	line = 1;
 	MENU_print_menu();
 	MENU_highlight_item();
-	while(1){
-		MENU_select_item();
-		MENU_navigate();
-		//printf("Current line %d \n", line);
-	}
-
+	MENU_select_item();
+	MENU_navigate();
 }
 
 
@@ -130,13 +148,46 @@ void MENU_print_menu(){
 
 void MENU_select_item(){
 	//int pressed = JOY_button();
-	if (JOY_button() && current_child!= NULL){
-		while(JOY_button()){}
-		current_menu = current_child;
-		current_child = current_child->child[0];
-		line = 1;
-		MENU_print_menu();
+	static int inverted;
+	if ((JOY_button() || JOY_get_direction() == RIGHT) && current_child!= NULL){
+		if (current_child->child[0]!= NULL){
+			current_menu = current_child;
+			current_child = current_child->child[0];
+			line = 1;
+			MENU_print_menu();
+		}else{
+			if(current_child == &clear_highscores){
+				// Delete highscore
+			}
+			else if(current_child == &contrast_low)
+				OLED_set_contrast( LOW_CONTRAST );
+			else if(current_child == &contrast_medium)
+				OLED_set_contrast( MEDIUM_CONTRAST );
+			else if(current_child == &contrast_high)
+				OLED_set_contrast( HIGH_CONTRAST );
+			else if(current_child == &invert_screen){
+				if (!inverted){
+					OLED_write_command(SET_INVERSE_DISPLAY);
+					inverted = 1;
+				}else{
+					OLED_write_command(SET_NORMAL_DISPLAY);
+					inverted = 0;
+				}
+			}else if(current_child == &slow_speed){
+				STATE_OPTION_set_speed(1);
+				STATE_OPTION_set(game_init);
+			}else if(current_child == &medium_speed){
+				STATE_OPTION_set_speed(2);
+				STATE_OPTION_set(game_init);
+			}else if(current_child == &fast_speed){
+				STATE_OPTION_set_speed(3);
+				STATE_OPTION_set(game_init);
+			}
+		}
+		while(JOY_button()|| JOY_get_direction() == RIGHT){}
 	}
+	// hvis child=null
+	// finn hvilken meny vi er i -> gjør noe
 }
 
 
@@ -181,17 +232,6 @@ void MENU_navigate(){
 			break;
 		
 	}
-	//if (dir == UP && line > 1){
-		//// current_child->prev;
-		//MENU_highlighte_item(current_child,  line -1)
-		//}else if (dir == DOWN && line < ){
-		//// current_child->next;
-		//MENU_highlighte_item(current_child,  line + 1)
-		//}else if (dir == LEFT){
-		//MENU_highlighte_item(menu_item_info_t parent,  1)
-		//// item->parent;
-	//}
-	//
 }
 
 

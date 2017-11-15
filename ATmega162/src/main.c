@@ -6,6 +6,7 @@
  */ 
 #include "setup.h"
 #include "menu.h"
+#include "state_option.h"
 #include "drivers/sram.h"
 #include "drivers/adc.h"
 #include "drivers/joystick.h"
@@ -22,6 +23,8 @@
 //#include <stdio.h>
 #include <avr/interrupt.h>
 
+
+
 int main( void ){
 	cli();
 	// Initializations 
@@ -30,42 +33,37 @@ int main( void ){
 	
 	JOY_init();
 	TOUCH_init();
-	//OLED_init();
-	//MENU_init();
+	OLED_init();
+	MENU_init();
 	
 	SPI_init();
 	MCP_init();
 	CAN_init();
 	
 	printf("\n\n\nInit done\n");
+	STATE_OPTION_set(menu);
 	sei();
-	//can_msg send = {.id = 1, .length = 1, .data = 130};
-	can_msg send;
-	send.id = ATmega162_ID;
-	send.length = 4;
-	send.data[0] = 'H';
-	send.data[1] = 'o';
-	send.data[2] = 'l';
-	send.data[3] = '\0';
-	can_msg receive;
 	
 	while(1){
-		////printf("While loop\n");
-		//CAN_msg_send(&send);
-		////printf("Message sent\n");
-		//_delay_us(200);
-		//CAN_handle_interrupt(&receive);
-		//printf("Message received\n");
-		//printf("\n\nSent message: %s \t Received message: %s \n", send.data, receive.data);
-		//printf("Sent id: %d \t Received id: %d \n", send.id, receive.id);
-		//printf("Sent length: %d \t Received length: %d \n", send.length, receive.length);
-		//printf("\n\nSent message: %s \n", send.data);
-		//printf("Sent id: %d \n", send.id);
-		//printf("Sent length: %d \n", send.length);
-		
-		SEND2CAN_send_joy_pos_x();
-		SEND2CAN_send_slider_pos();
-		SEND2CAN_touch_button_pressed();
+
+		switch (STATE_OPTION_get()){
+			case menu:
+			MENU_select_item();
+			MENU_navigate();
+				break;
+			case game_init:
+				SEND2CAN_send_speed(STATE_OPTION_get_speed());
+				//print noe på oled
+				STATE_OPTION_set(game);
+			case game:
+				SEND2CAN_send_joy_pos_x();
+				SEND2CAN_send_slider_pos();
+				SEND2CAN_touch_button_pressed();
+				break;
+			default:
+				STATE_OPTION_set(menu);
+				break;
+		}
 		_delay_ms(1);
 	}
 	

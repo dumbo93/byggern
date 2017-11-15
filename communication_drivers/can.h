@@ -28,6 +28,8 @@ enum interrupt_flags {no_flag, RX0, RX1};
 #define CAN_SLIDER_POS_L	2
 #define CAN_SLIDER_POS_R	3
 #define CAN_TOUCH_BUTTON	4
+#define CAN_LIVES			5
+#define CAN_SPEED			6
 
 
 int CAN_init();

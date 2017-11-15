@@ -8,17 +8,18 @@
 #include "count_score.h"
 
 int COUNT_SCORE_get(){
-	static int score;
+	static int lives = 3;
 	static uint8_t prev_value;
 	
 	int value = IR_read();
 	
 	if (value != prev_value){
 		if (value == 0){
-			score++;
-			printf("SCORE!! New score is: %d\n", score);
+			lives--;
+			printf("SCORE!! Number of lives left: %d\n", lives);
 		}
 	}
 	prev_value = value;
+	return lives;
 }
 

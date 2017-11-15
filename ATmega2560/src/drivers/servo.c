@@ -11,11 +11,10 @@
 
 void SERVO_set_position(uint8_t pos)
 {
-
-	float pulse_width_ms;
-	pulse_width_ms = (float)pos/255 * (MAX - MIN) + MIN; //Scaled between MIN and MAX
+	uint16_t pulse_width = MIN + (uint16_t)pos;
+	if ( pulse_width > MAX){ pulse_width = MAX; }
+	else if ( pulse_width < MIN ){ pulse_width = MIN; }
+		
+	COUNTER_set_pulse_width(pulse_width);
 	
-	if ( pulse_width_ms > MAX){ pulse_width_ms = MAX; }
-	else if ( pulse_width_ms < MIN ){ pulse_width_ms = MIN; }
-	COUNTER_set_pulse_width(pulse_width_ms);
 }

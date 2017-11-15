@@ -71,6 +71,21 @@ void MOTOR_set_dir(int dir)
 	//}
 }
 
+void MOTOR_set_max_velocity(int speed){
+	switch (speed){
+		case 1:
+			max_velocity = 0x30;
+			break;
+		case 2:
+		max_velocity = 0x50;
+		break;
+		case 3:
+		max_velocity = 0x70;
+		break;
+		
+	}
+}
+
 void MOTOR_set_velocity(uint8_t vel)
 {
 	uint8_t velocity[1];

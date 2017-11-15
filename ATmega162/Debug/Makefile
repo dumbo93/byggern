@@ -51,7 +51,8 @@ C_SRCS +=  \
 ../src/drivers/sram.c \
 ../src/drivers/touch_panel.c \
 ../src/main.c \
-../src/menu.c
+../src/menu.c \
+../src/state_option.c
 
 
 PREPROCESSING_SRCS += 
@@ -72,7 +73,8 @@ src/drivers/oled.o \
 src/drivers/sram.o \
 src/drivers/touch_panel.o \
 src/main.o \
-src/menu.o
+src/menu.o \
+src/state_option.o
 
 OBJS_AS_ARGS +=  \
 src/communication_drivers/can.o \
@@ -86,7 +88,8 @@ src/drivers/oled.o \
 src/drivers/sram.o \
 src/drivers/touch_panel.o \
 src/main.o \
-src/menu.o
+src/menu.o \
+src/state_option.o
 
 C_DEPS +=  \
 src/communication_drivers/can.d \
@@ -100,7 +103,8 @@ src/drivers/oled.d \
 src/drivers/sram.d \
 src/drivers/touch_panel.d \
 src/main.d \
-src/menu.d
+src/menu.d \
+src/state_option.d
 
 C_DEPS_AS_ARGS +=  \
 src/communication_drivers/can.d \
@@ -114,7 +118,8 @@ src/drivers/oled.d \
 src/drivers/sram.d \
 src/drivers/touch_panel.d \
 src/main.d \
-src/menu.d
+src/menu.d \
+src/state_option.d
 
 OUTPUT_FILE_PATH +=ATmega162.elf
 
@@ -130,6 +135,8 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

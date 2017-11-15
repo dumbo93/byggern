@@ -16,8 +16,8 @@
 #include "drivers/adc_2560.h"
 #include "drivers/ir.h"
 #include "drivers/solenoid.h"
-
 #include "drivers/motor.h"
+
 #include "count_score.h"
 #include "controller.h"
 
@@ -43,6 +43,7 @@ int main( void ){
 	MOTOR_find_limits();
 
 	can_msg receive;
+	can_msg send;
 	uint8_t value;
 	int msg_type;
 	uint8_t twi_message[1];
@@ -50,8 +51,10 @@ int main( void ){
 	float encoder_pos;
 	float y;
 	float u;
-	float reference;
-	uint8_t prev_data = 0;
+	float reference = 127;
+	uint8_t joy_pos = 127;
+	uint8_t prev_lives = 3;
+	uint8_t lives;
 	
 	while(1){
 		CAN_handle_interrupt(&receive);
@@ -59,12 +62,9 @@ int main( void ){
 		msg_type = receive.data[0];
 		switch(msg_type){
 			case CAN_JOY_POS_X:
-				if (receive.data[1] != prev_data){
-					//printf("\n\nReceived slider position: (%d) \n",receive.data[1]);
-					SERVO_set_position(receive.data[1]);
-					prev_data=receive.data[1];
-				}
-
+				//printf("\n\nReceived slider position: (%d) \n",receive.data[1]);
+				joy_pos = receive.data[1];
+				SERVO_set_position(joy_pos);
 				break;
 			case CAN_SLIDER_POS_R:
 				//printf("\n\nReceived joystick pos (x): (%d) \n", receive.data[1]);
@@ -75,22 +75,38 @@ int main( void ){
 				//printf("\t\t\t Reference after: %d\n", (int)reference);
 				break;
 			case CAN_TOUCH_BUTTON:
-				//solenoid
 				SOLENOID_pulse(1);
+				break;
+			case CAN_SPEED:
+				MOTOR_set_max_velocity(receive.data[1]);
+				break;
+			default:
+				break;
 		}
+		
+		//
+		//lives = COUNT_SCORE_get();
+		//if(lives != prev_lives){
+			//send.id = ATmega2560_ID;
+			//send.data[0] = CAN_LIVES;
+			//send.data[1] = lives;
+			//send.length = 2;
+			//CAN_msg_send(&send);
+			//prev_lives = lives;
+		//}
+		
+		
 		y = MOTOR_read_scaled_encoder();
 		if (y < 0){ y = 0; }
 		u = CONTROLLER_run(y, reference);
 		MOTOR_set_dir(y > reference);
-		//printf("\t\t\t Reference: %.1f\n", (int)reference);
+		//printf("\t\t\t Reference: %d\n", (int)reference);
 		//printf("\t\t\t Received data: %d\n", receive.data[1]);
 		MOTOR_set_velocity(u);		
 		
 
 		
-		//value = IR_read();
-		//printf("\nAvg IR signal: %d\n\n", value);
-		//COUNT_SCORE_get();
+		
 		
 		_delay_us(500);
 		

@@ -94,6 +94,7 @@ void CAN_handle_interrupt(can_msg *msg)
 	switch(interrupt_flag){
 		case no_flag:
 		//printf("no interrupt 1\n");
+			msg->data[0] = 10;
 			break;
 		case RX0:
 			CAN_msg_receive(msg, MCP_RXB0CTRL);
