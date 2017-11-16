@@ -11,15 +11,16 @@ int COUNT_SCORE_get(){
 	static int lives = 3;
 	static uint8_t prev_value;
 	
-	int value = IR_read();
+	int val = IR_read();
+	//printf("IR value: %d\n", val);
 	
-	if (value != prev_value){
-		if (value == 0){
+	if (val != prev_value){
+		if (val == 0){
 			lives--;
 			printf("SCORE!! Number of lives left: %d\n", lives);
 		}
 	}
-	prev_value = value;
+	prev_value = val;
 	return lives;
 }
 

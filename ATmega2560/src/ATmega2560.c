@@ -37,7 +37,6 @@ int main( void ){
 	ADC_init_2560();
 	MOTOR_init();
 	SOLENOID_init();
-	printf("Init almost done\n");
 	CONTROLLER_init_timer();
 	printf("\n\n\nInit done\n");
 	sei();
@@ -46,17 +45,12 @@ int main( void ){
 
 	can_msg receive;
 	can_msg send;
-	uint8_t value;
 	int msg_type;
-	uint8_t twi_message[1];
-	int16_t velocity;
-	float encoder_pos;
 	int y;
 	int u;
 	int reference = 127;
-	uint8_t joy_pos = 127;
 	uint8_t prev_lives = 3;
-	uint8_t lives;
+	int val;
 	CONTROLLER_set_reference(reference);
 	
 	while(1){
@@ -70,16 +64,13 @@ int main( void ){
 				break;
 			case CAN_SLIDER_POS_R:
 				printf("\n\nReceived slider pos (x): (%d) \n", receive.data[1]);
-				//reference =(float)receive.data[1];
-				//printf("\t\t\t Received data before: %d\n", receive.data[1]);
-				//printf("\t\t\t Reference before: %d\n", (int)reference);
 				reference = CONTROLLER_set_reference(receive.data[1]);
-				//printf("\t\t\t Reference after: %d\n", (int)reference);
 				break;
 			case CAN_TOUCH_BUTTON:
 				SOLENOID_pulse(1);
 				break;
 			case CAN_SPEED:
+				printf("Starting game\n");
 				MOTOR_find_limits();
 				MOTOR_set_max_velocity(receive.data[1]);
 				break;
@@ -88,15 +79,18 @@ int main( void ){
 		}
 		
 		//
-		//lives = COUNT_SCORE_get();
-		//if(lives != prev_lives){
-			//send.id = ATmega2560_ID;
-			//send.data[0] = CAN_LIVES;
-			//send.data[1] = lives;
-			//send.length = 2;
-			//CAN_msg_send(&send);
-			//prev_lives = lives;
-		//}
+		
+		val = IR_read();
+		if (val - prev_value < 3){
+			if (val == 0){
+				send.id = ATmega2560_ID;
+				send.data[0] = CAN_LIVES;
+				send.length = 1;
+				CAN_msg_send(&send);
+			}
+			prev_value = val;
+		}
+		
 		
 		
 		y = MOTOR_read_scaled_encoder();
@@ -104,15 +98,8 @@ int main( void ){
 		if (y > 255){ y = 255; }
 		u = CONTROLLER_run(y, reference);
 		MOTOR_set_dir(u < 0);
-		//printf("\t\t\t Reference: %d\n", (int)reference);
-		//printf("\t\t\t Received data: %d\n", receive.data[1]);
 		MOTOR_set_velocity((uint8_t)u);		
 		
-
-		
-		
-		
-		//_delay_us(500);
 		
 	}
 	

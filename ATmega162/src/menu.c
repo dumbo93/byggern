@@ -9,8 +9,10 @@
 #include "state_option.h"
 #include "drivers/oled.h"
 #include "drivers/joystick.h"
+#include "drivers/sram.h"
 
 #include <stdlib.h>
+#include <string.h>
 
 menu_item_info_t main_menu, play_game, highscores, settings, slow_speed, medium_speed, fast_speed, clear_highscores, contrast_level, invert_screen,contrast_low,contrast_medium,contrast_high;
 
@@ -144,20 +146,52 @@ void MENU_print_menu(){
 		OLED_print(current_menu->child[i]->name,i+1);
 	}
 }
+int cmpfunc (const void * a, const void * b) {
+	return ( *(int*)a - *(int*)b );
+}
+void MENU_print_highscores(){
+	//int max_num_highscores = 5;
+	//OLED_reset();
+	//OLED_print(current_menu->name, 0);
+	//char highscore[2];
+	//char number[1];
+	//uint8_t scores[max_num_highscores];
+	//for (uint8_t i = 0; i < max_num_highscores; i++){
+		//scores[(int)i] = SRAM_retrieve(i);
+	//}
+	////qsort(scores, max_num_highscores, sizeof(uint8_t), cmpfunc);
+	//
+	//for (uint8_t i = 0; i < max_num_highscores; i++){
+		//OLED_goto_column(2);
+		//itoa(i+1, number, 10);
+		//OLED_print(number, i + 1);
+		//
+		//OLED_goto_column(20);
+		//itoa(scores[i], highscore, 10);
+		//strcat(highscore, "\n");
+		//printf("%s",highscore);
+		//OLED_print(highscore, i+1);
+	//}
+}
+
+void MENU_delete_highscores()
+{
+	
+}
 
 
 void MENU_select_item(){
 	//int pressed = JOY_button();
 	static int inverted;
 	if ((JOY_button() || JOY_get_direction() == RIGHT) && current_child!= NULL){
-		if (current_child->child[0]!= NULL){
+		if (current_child->child[0] != NULL){
 			current_menu = current_child;
 			current_child = current_child->child[0];
 			line = 1;
 			MENU_print_menu();
 		}else{
 			if(current_child == &clear_highscores){
-				// Delete highscore
+				MENU_delete_highscores();
 			}
 			else if(current_child == &contrast_low)
 				OLED_set_contrast( LOW_CONTRAST );
@@ -183,11 +217,15 @@ void MENU_select_item(){
 				STATE_OPTION_set_speed(3);
 				STATE_OPTION_set(game_init);
 			}
+			else if(current_child == &highscores){
+				current_menu = current_child;
+				current_child = current_child->child[0];
+				line = 1;
+				MENU_print_highscores();
+			}
 		}
-		while(JOY_button()|| JOY_get_direction() == RIGHT){}
+		while(JOY_button() || JOY_get_direction() == RIGHT){}
 	}
-	// hvis child=null
-	// finn hvilken meny vi er i -> gjør noe
 }
 
 
@@ -244,4 +282,26 @@ void MENU_highlight_item( void )
 	
 	OLED_pos(line, 0);
 	OLED_print_arrow();
+}
+
+void MENU_print_pause_screen(int remaining_lives)
+{
+	OLED_reset();
+	OLED_pos(3, 20);
+	char* pause_message = "You have ";
+	OLED_print(pause_message, 3);
+	itoa(remaining_lives, pause_message, 10);
+	OLED_print(pause_message, 3);
+	pause_message = " lives left\n";
+	OLED_print(pause_message, 3);
+	OLED_pos(5, 20);
+	pause_message = "Press joystick to continue";// the game.";
+	OLED_print(pause_message, 5);
+}
+
+void MENU_print_game_screen(void){
+	OLED_reset();
+	OLED_pos(3, 30);
+	char* game_message = "Play game :D";
+	OLED_print(game_message, 3);
 }

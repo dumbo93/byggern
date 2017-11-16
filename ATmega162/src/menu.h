@@ -24,11 +24,18 @@ void MENU_init( void );
 
 void MENU_print_menu();
 
+void MENU_print_highscores();
+void MENU_delete_highscores();
+
 void MENU_select_item();
 
 void MENU_navigate();
 
 void MENU_highlight_item( void );
+
+void MENU_print_pause_screen(int remaining_lives);
+
+void MENU_print_game_screen(void);
 
 
 

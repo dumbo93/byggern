@@ -12,11 +12,11 @@
 
 int ADC_init(void)
 {
-	set_bit(MCUCR, SRE);
-	set_bit(SFIOR, XMM2);
+	MCUCR |= (1 << SRE);
+	SFIOR |= (1 << XMM2);
 	
 	// Set the interrupt pin to input
-	clear_bit(DDRD, PD3);
+	DDRD &= ~(1 << PD3);
 	return 0;
 }
 

@@ -9,7 +9,7 @@
 #ifndef STATE_OPTION_H_
 #define STATE_OPTION_H_
 
-typedef enum{menu, game_init, game} state_t;
+typedef enum{menu, game_init, game, game_pause, game_over} state_t;
 	
 void STATE_OPTION_set(state_t new_state);
 state_t STATE_OPTION_get(void);

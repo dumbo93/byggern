@@ -9,16 +9,39 @@
 #include "sram.h"
 //#include "../setup.h"
 #include "../memory_mapping.h"
-#include "../../../communication_drivers/uart.h"	// for sram_main
-#include <avr/io.h>
 #include <stdlib.h>
 #include <stdio.h>
+
+volatile char *ext_ram = (char *) SRAM_DATA_ADDRESS; // Start address for the SRAM
+uint16_t ext_ram_size = 0x800;
 
 void SRAM_init(void){
 	// Enable External Memory Interface
 	MCUCR |= (1 << SRE);
 	// Release PC7-PC4 for JTAG
-	SFIOR |= (3 << XMM0);
+	SFIOR |= (4 << XMM0);
+}
+
+void SRAM_save(uint8_t saved_value, uint16_t address)
+{
+	if (address < ext_ram_size){
+		printf("Starting SRAM write...\n");
+		ext_ram[address] = saved_value;
+	}
+	
+}
+
+uint8_t SRAM_retrieve(uint16_t address)
+{
+	if (address < ext_ram_size){
+		printf("Starting SRAM read...\n");
+		uint8_t retreived_value = ext_ram[address];
+		return retreived_value;
+	}
+	else{
+		printf("SRAM read failed. Invalid address\n");
+		return 0;
+	}
 }
 
 void SRAM_test(void)
@@ -56,11 +79,3 @@ void SRAM_test(void)
 	printf("SRAM test completed with \n%4d errors in write phase and \n%4d errors in retrieval phase\n\n", write_errors, retrieval_errors);
 
 }
-
-//void sram_main(void)
-//{
-	//UART_Init ( MYUBRR );
-	//SRAM_init();
-	//SRAM_test();
-	//
-//}

@@ -10,8 +10,8 @@
 #include <math.h>
 #include <avr/interrupt.h>
 
-int Kp = 110; //0.7*100
-int Ki = 10; //1.3*10
+int Kp = 110; //1.1*100
+int Ki = 10; //1*10
 int Kd = 100; //Kd * 1000
 
 volatile int run_controller_flag = 0;
@@ -62,11 +62,11 @@ int CONTROLLER_run(int y, int reference)
 			}
 			derivative = (error - prev_err)/dt;
 			u = Kp*error + Ki*integral + Kd*derivative;
-			printf("\nInput u: %d\n", (int)u/100);
-			printf("Output y: %d\n", (int)y);
-			printf("Reference: %d\n", (int)reference);
-			printf("Error: %d\n", (int)error);
-			printf("Integral: %d\n", (int)integral/10);
+			//printf("\nInput u: %d\n", (int)u/100);
+			//printf("Output y: %d\n", (int)y);
+			//printf("Reference: %d\n", (int)reference);
+			//printf("Error: %d\n", (int)error);
+			//printf("Integral: %d\n", (int)integral/10);
 			prev_err = error;
 			run_controller_flag = 0;
 			break;
