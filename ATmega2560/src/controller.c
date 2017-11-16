@@ -10,45 +10,73 @@
 #include <math.h>
 #include <avr/interrupt.h>
 
-float Kp = 0.9;
-float Ki = 0.7;
+int Kp = 110; //0.7*100
+int Ki = 10; //1.3*10
+int Kd = 100; //Kd * 1000
 
-volatile uint16_t *timer = &TCNT1;
+volatile int run_controller_flag = 0;
 
-float CONTROLLER_set_reference(uint8_t reference)
+void CONTROLLER_init_timer()
 {
-	float reff;
+	// OC3A disconnected. Normal port operation	
+	// Normal mode (mode 0) (everything is zero initially)
+
+	
+	// Set prescaler to 1/64
+	TCCR3B |= (1 << CS31) | (1 << CS30);
+	
+	//Set the desired output compare match that will generate at timer interrupt
+	// Choose dt = 0.1 -> OCR3A = 12500
+	OCR3A = 0x30D4;
+	
+	//Enable output compare interrupt 3A
+	TIMSK3 |= (1 << OCIE3A);
+}
+
+int CONTROLLER_set_reference(uint8_t reference)
+{
+	int reff;
 	//printf("\nReference: (%d)\n", reference);
-	reff = abs(reference - 255); // 255 is rightmost position, 0 is leftmost position
+	reff = abs(reference - 0xFF); // 255 is rightmost position, 0 is leftmost position
 	//printf("\n\nReference: (%d) \n", (int)reff);
 	return reff;
 	
 }
 
-uint8_t CONTROLLER_run(float y, float reference)
+int CONTROLLER_run(int y, int reference)
 {
-	static float integral;
-	float error;
-	float u;
-	float dt = (float)*timer/F_CPU;
-	//float dt = 0.01;
-	//printf("dt: %d\n", *timer);
-	*timer = 0;
+	static int integral;
+	int error;
+	static int u;
+	static int prev_err;
+	int derivative;
+	int dt = 1; //0.1*10
 	
+	switch(run_controller_flag){
+		case 0:
+			break;
+		case 1:
+			error = reference - y;
+			if (abs(error) > 10){
+				integral = integral + error*dt;
+			}
+			derivative = (error - prev_err)/dt;
+			u = Kp*error + Ki*integral + Kd*derivative;
+			printf("\nInput u: %d\n", (int)u/100);
+			printf("Output y: %d\n", (int)y);
+			printf("Reference: %d\n", (int)reference);
+			printf("Error: %d\n", (int)error);
+			printf("Integral: %d\n", (int)integral/10);
+			prev_err = error;
+			run_controller_flag = 0;
+			break;
+			
+	}
+	return (int)u/100;
 	
-	error = reference - y;
-	integral = integral + error*dt;
-	u = Kp*error + Ki*integral;
-	//printf("\nInput u: %d\n", (int)u);
-	//printf("Output y: %d\n", (int)y);
-	//printf("Reference: %d\n", (int)reference);
-	//printf("Error: %d\n", (int)error);
-	//printf("Integral: %d\n\n", (int)integral);
-	
-	return (uint8_t)u;
 }
 
-//ISR(TIMER3_COMPA_vect){
-	//TCNT3 = 0;
-	//run_pid_flag = 1;
-//}
+ISR(TIMER3_COMPA_vect){
+	TCNT3 = 0;
+	run_controller_flag = 1;
+}

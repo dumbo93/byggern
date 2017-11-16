@@ -10,8 +10,9 @@
 #define CONTROLLER_H_
 #include <avr/io.h>
 
-float CONTROLLER_set_reference(uint8_t reference);
-uint8_t CONTROLLER_run(float y, float reference);
+void CONTROLLER_init_timer();
+int CONTROLLER_set_reference(uint8_t reference);
+int CONTROLLER_run(int y, int reference);
 
 
 #endif /* CONTROLLER_H_ */

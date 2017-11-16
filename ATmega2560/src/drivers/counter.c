@@ -30,7 +30,7 @@ void COUNTER_init()
 	DDRB |= (1 << DDB5);
 	
 	// Set middle position of servo
-	COUNTER_set_pulse_width(375);
+	COUNTER_set_pulse_width(0x0177);
 }
 
 void COUNTER_set_pulse_width(uint16_t pulse_width)

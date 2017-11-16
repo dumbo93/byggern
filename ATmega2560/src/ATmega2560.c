@@ -37,6 +37,8 @@ int main( void ){
 	ADC_init_2560();
 	MOTOR_init();
 	SOLENOID_init();
+	printf("Init almost done\n");
+	CONTROLLER_init_timer();
 	printf("\n\n\nInit done\n");
 	sei();
 	
@@ -49,12 +51,13 @@ int main( void ){
 	uint8_t twi_message[1];
 	int16_t velocity;
 	float encoder_pos;
-	float y;
-	float u;
-	float reference = 127;
+	int y;
+	int u;
+	int reference = 127;
 	uint8_t joy_pos = 127;
 	uint8_t prev_lives = 3;
 	uint8_t lives;
+	CONTROLLER_set_reference(reference);
 	
 	while(1){
 		CAN_handle_interrupt(&receive);
@@ -62,13 +65,12 @@ int main( void ){
 		msg_type = receive.data[0];
 		switch(msg_type){
 			case CAN_JOY_POS_X:
-				//printf("\n\nReceived slider position: (%d) \n",receive.data[1]);
-				joy_pos = receive.data[1];
-				SERVO_set_position(joy_pos);
+				printf("\n\nReceived joystick position: (%d) \n",receive.data[1]);
+				SERVO_set_position(receive.data[1]);
 				break;
 			case CAN_SLIDER_POS_R:
-				//printf("\n\nReceived joystick pos (x): (%d) \n", receive.data[1]);
-				reference =(float)receive.data[1];
+				printf("\n\nReceived slider pos (x): (%d) \n", receive.data[1]);
+				//reference =(float)receive.data[1];
 				//printf("\t\t\t Received data before: %d\n", receive.data[1]);
 				//printf("\t\t\t Reference before: %d\n", (int)reference);
 				reference = CONTROLLER_set_reference(receive.data[1]);
@@ -78,6 +80,7 @@ int main( void ){
 				SOLENOID_pulse(1);
 				break;
 			case CAN_SPEED:
+				MOTOR_find_limits();
 				MOTOR_set_max_velocity(receive.data[1]);
 				break;
 			default:
@@ -98,17 +101,18 @@ int main( void ){
 		
 		y = MOTOR_read_scaled_encoder();
 		if (y < 0){ y = 0; }
+		if (y > 255){ y = 255; }
 		u = CONTROLLER_run(y, reference);
-		MOTOR_set_dir(y > reference);
+		MOTOR_set_dir(u < 0);
 		//printf("\t\t\t Reference: %d\n", (int)reference);
 		//printf("\t\t\t Received data: %d\n", receive.data[1]);
-		MOTOR_set_velocity(u);		
+		MOTOR_set_velocity((uint8_t)u);		
 		
 
 		
 		
 		
-		_delay_us(500);
+		//_delay_us(500);
 		
 	}
 	

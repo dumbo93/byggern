@@ -11,7 +11,7 @@
 #include "../setup.h"
 #include <util/delay.h>
 
-uint8_t max_velocity = 0x50;
+volatile uint8_t max_velocity = 0x60;
 
 
 void MOTOR_init()
@@ -77,11 +77,11 @@ void MOTOR_set_max_velocity(int speed){
 			max_velocity = 0x30;
 			break;
 		case 2:
-		max_velocity = 0x50;
-		break;
+			max_velocity = 0x60;
+			break;
 		case 3:
-		max_velocity = 0x70;
-		break;
+			max_velocity = 0x70;
+			break;
 		
 	}
 }
@@ -132,10 +132,10 @@ int16_t MOTOR_read_encoder(void)
 	
 }
 
-float MOTOR_read_scaled_encoder()
+int MOTOR_read_scaled_encoder()
 {
-	float encoder_value = (float)MOTOR_read_encoder()/MOTOR_max_encoder_value * 255; //Scaled between 0 and 255
+	float encoder_value = (float)MOTOR_read_encoder()/MOTOR_max_encoder_value * 0xFF; //Scaled between 0 and 255
 	//encoder_value = abs(encoder_value - 255.0); // 255 is rightmost position, 0 is leftmost position
 	//printf("\tScaled encoder value: %d\n", (int)encoder_value);
-	return encoder_value;
+	return (int)encoder_value;
 }
