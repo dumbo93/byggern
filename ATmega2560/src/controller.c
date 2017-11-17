@@ -25,7 +25,7 @@ void CONTROLLER_init_timer()
 	// Set prescaler to 1/64
 	TCCR3B |= (1 << CS31) | (1 << CS30);
 	
-	//Set the desired output compare match that will generate at timer interrupt
+	//Set the desired output compare match that will generate a timer interrupt
 	// Choose dt = 0.1 -> OCR3A = 12500
 	OCR3A = 0x30D4;
 	

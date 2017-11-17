@@ -37,6 +37,8 @@ void MENU_print_pause_screen(int remaining_lives);
 
 void MENU_print_game_screen(void);
 
+void MENU_print_game_over_screen(int score);
+
 
 
 #endif /* MENU_H_ */

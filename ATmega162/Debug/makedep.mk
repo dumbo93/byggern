@@ -20,7 +20,11 @@ src\drivers\oled.c
 
 src\drivers\sram.c
 
+src\drivers\timer.c
+
 src\drivers\touch_panel.c
+
+src\highscore.c
 
 src\main.c
 

@@ -7,12 +7,11 @@
 
 
 #include "sram.h"
-//#include "../setup.h"
 #include "../memory_mapping.h"
 #include <stdlib.h>
 #include <stdio.h>
 
-volatile char *ext_ram = (char *) SRAM_DATA_ADDRESS; // Start address for the SRAM
+//volatile char *ext_ram = (char *) SRAM_DATA_ADDRESS; // Start address for the SRAM
 uint16_t ext_ram_size = 0x800;
 
 void SRAM_init(void){
@@ -24,8 +23,9 @@ void SRAM_init(void){
 
 void SRAM_save(uint8_t saved_value, uint16_t address)
 {
+	volatile char *ext_ram = (char *) SRAM_DATA_ADDRESS;
 	if (address < ext_ram_size){
-		printf("Starting SRAM write...\n");
+		printf("Starting SRAM save...\n");
 		ext_ram[address] = saved_value;
 	}
 	
@@ -33,8 +33,9 @@ void SRAM_save(uint8_t saved_value, uint16_t address)
 
 uint8_t SRAM_retrieve(uint16_t address)
 {
+	volatile char *ext_ram = (char *) SRAM_DATA_ADDRESS;
 	if (address < ext_ram_size){
-		printf("Starting SRAM read...\n");
+		printf("Starting SRAM retrieve...\n");
 		uint8_t retreived_value = ext_ram[address];
 		return retreived_value;
 	}

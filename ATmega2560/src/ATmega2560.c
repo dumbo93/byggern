@@ -8,8 +8,6 @@
 
 #include "setup.h"
 #include "../../communication_drivers/uart.h"
-#include "../../communication_drivers/spi.h"
-#include "../../communication_drivers/MCP2515.h"
 #include "../../communication_drivers/can.h"
 #include "drivers/counter.h"
 #include "drivers/servo.h"
@@ -28,10 +26,9 @@
 
 int main( void ){
 	cli();
-	printf("Initializations\n");
+	
 	UART_Init( MYUBRR );
-	SPI_init();
-	MCP_init();
+	printf("Initializations\n");
 	CAN_init();
 	COUNTER_init();
 	ADC_init_2560();
@@ -49,8 +46,8 @@ int main( void ){
 	int y;
 	int u;
 	int reference = 127;
-	uint8_t prev_lives = 3;
 	int val;
+	int prev_value = 0;
 	CONTROLLER_set_reference(reference);
 	
 	while(1){
@@ -68,17 +65,16 @@ int main( void ){
 				break;
 			case CAN_TOUCH_BUTTON:
 				SOLENOID_pulse(1);
+				
 				break;
 			case CAN_SPEED:
 				printf("Starting game\n");
-				MOTOR_find_limits();
 				MOTOR_set_max_velocity(receive.data[1]);
+				MOTOR_find_limits();
 				break;
 			default:
 				break;
 		}
-		
-		//
 		
 		val = IR_read();
 		if (val - prev_value < 3){
@@ -91,19 +87,13 @@ int main( void ){
 			prev_value = val;
 		}
 		
-		
-		
 		y = MOTOR_read_scaled_encoder();
 		if (y < 0){ y = 0; }
 		if (y > 255){ y = 255; }
 		u = CONTROLLER_run(y, reference);
 		MOTOR_set_dir(u < 0);
 		MOTOR_set_velocity((uint8_t)u);		
-		
-		
 	}
 	
-	
-
 	return 0;
 }

@@ -6,6 +6,7 @@
  */ 
 #include "spi.h"
 #include "../ATmega162/src/bit_manipulation.h"
+#include "../ATmega162/src/setup.h"
 #include <avr/io.h>
 #include <util/delay.h>
 

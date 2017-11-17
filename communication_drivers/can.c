@@ -14,6 +14,7 @@ enum interrupt_flags interrupt_flag = no_flag;
 
 int CAN_init()
 {
+	MCP_init();
 	// Turn mask/filters off
 	MCP_bit_modify(MCP_RXB0CTRL, MCP_FILTER_OFF, MCP_FILTER_OFF);
 	MCP_bit_modify(MCP_RXB1CTRL, MCP_FILTER_OFF, MCP_FILTER_OFF);
@@ -42,13 +43,13 @@ int CAN_init()
 	
 	#if defined(__AVR_ATmega162__)
 	// Falling edge of INT0 generates interrupt request
-	MCUCR |= (1 << ISC01) | (0 << ISC00);
+	MCUCR |= (0 << ISC01) | (0 << ISC00);
 	GICR |= (1 << INT0);
 	#endif
 
 	#if defined(__AVR_ATmega2560__)
 	// Falling edge of INT2 generates interrupt request
-	EICRA |= (1 << ISC21) | (0 << ISC20);
+	EICRA |= (0 << ISC21) | (0 << ISC20);
 	// Enable external interrupts of INT2
 	EIMSK |= (1 << INT2);
 	#endif

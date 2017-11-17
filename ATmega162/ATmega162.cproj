@@ -177,10 +177,22 @@
     <Compile Include="src\drivers\sram.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\drivers\timer.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\drivers\timer.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\drivers\touch_panel.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\drivers\touch_panel.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\highscore.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\highscore.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\main.c">

@@ -12,6 +12,7 @@
 #include <util/delay.h>
 
 volatile uint8_t max_velocity = 0x60;
+const uint8_t init_velocity = 0x60;
 
 
 void MOTOR_init()
@@ -37,9 +38,9 @@ void MOTOR_find_limits( void )
 {
 	// *** Calibrate ***
 	MOTOR_set_dir(1);
-	MOTOR_set_velocity(max_velocity);
+	MOTOR_set_velocity(init_velocity);
 	_delay_ms(2000);
-	MOTOR_set_velocity((uint8_t)1);
+	MOTOR_set_velocity(0);
 	
 	// Reset encoder
 	PORTH &= ~(1 << PH6);
@@ -48,7 +49,7 @@ void MOTOR_find_limits( void )
 	
 	// Find max encoder value
 	MOTOR_set_dir(0);
-	MOTOR_set_velocity(max_velocity);
+	MOTOR_set_velocity(init_velocity);
 	_delay_ms(2000);
 	MOTOR_set_velocity(0);
 	MOTOR_max_encoder_value = MOTOR_read_encoder();
@@ -74,13 +75,13 @@ void MOTOR_set_dir(int dir)
 void MOTOR_set_max_velocity(int speed){
 	switch (speed){
 		case 1:
-			max_velocity = 0x30;
+			max_velocity = 0x40;
 			break;
 		case 2:
 			max_velocity = 0x60;
 			break;
 		case 3:
-			max_velocity = 0x70;
+			max_velocity = 0x80;
 			break;
 		
 	}

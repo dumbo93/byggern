@@ -49,7 +49,9 @@ C_SRCS +=  \
 ../src/drivers/joystick.c \
 ../src/drivers/oled.c \
 ../src/drivers/sram.c \
+../src/drivers/timer.c \
 ../src/drivers/touch_panel.c \
+../src/highscore.c \
 ../src/main.c \
 ../src/menu.c \
 ../src/state_option.c
@@ -71,7 +73,9 @@ src/drivers/send2can.o \
 src/drivers/joystick.o \
 src/drivers/oled.o \
 src/drivers/sram.o \
+src/drivers/timer.o \
 src/drivers/touch_panel.o \
+src/highscore.o \
 src/main.o \
 src/menu.o \
 src/state_option.o
@@ -86,7 +90,9 @@ src/drivers/send2can.o \
 src/drivers/joystick.o \
 src/drivers/oled.o \
 src/drivers/sram.o \
+src/drivers/timer.o \
 src/drivers/touch_panel.o \
+src/highscore.o \
 src/main.o \
 src/menu.o \
 src/state_option.o
@@ -101,7 +107,9 @@ src/drivers/send2can.d \
 src/drivers/joystick.d \
 src/drivers/oled.d \
 src/drivers/sram.d \
+src/drivers/timer.d \
 src/drivers/touch_panel.d \
+src/highscore.d \
 src/main.d \
 src/menu.d \
 src/state_option.d
@@ -116,7 +124,9 @@ src/drivers/send2can.d \
 src/drivers/joystick.d \
 src/drivers/oled.d \
 src/drivers/sram.d \
+src/drivers/timer.d \
 src/drivers/touch_panel.d \
+src/highscore.d \
 src/main.d \
 src/menu.d \
 src/state_option.d
@@ -135,6 +145,10 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
+
+
 
 
 

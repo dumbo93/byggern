@@ -6,7 +6,6 @@
  */ 
 
 #include "oled.h"
-#include "adc.h"
 #include "../memory_mapping.h"
 #include <avr/io.h>
 #include <stdio.h>
@@ -14,6 +13,9 @@
 
 volatile uint8_t *oled_cmd = (uint8_t *) OLED_COMMAND_ADDRESS;	// Start address for the OLED command
 volatile uint8_t *oled_data = (uint8_t *) OLED_DATA_ADDRESS;	// Start address for the OLED data
+
+static FILE oled_stdout = FDEV_SETUP_STREAM(OLED_print_char, NULL, _FDEV_SETUP_WRITE);
+static uint8_t line = 0;
 
 void OLED_init( void )
 {
@@ -69,24 +71,24 @@ void OLED_write_data( uint8_t data )
 	*oled_data = data;
 }
 
-/* SET_COLUMN_ADDRESS: This  triple  byte  command  specifies  column  start  address  and  end  address  of  the  display  data  RAM.  This
-command  also  sets  the  column  address  pointer  to  column
-start  address.    This  pointer  is  used  to  define  the
-current  read/write  column  address  in  graphic  display
-data  RAM.
-*/
+
 void OLED_goto_column( uint8_t column )
 {
-	OLED_write_command(SET_COLUMN_ADDRESS);
-	OLED_write_command(column);
-	OLED_write_command(0x7F);
+	if (column < NUM_COLUMNS){
+		OLED_write_command(SET_COLUMN_ADDRESS);
+		OLED_write_command(column);
+		OLED_write_command(0x7F);
+	}
 }
 
-void OLED_goto_line( uint8_t line )
+void OLED_goto_line( uint8_t l )
 {
-	OLED_write_command(SET_PAGE_ADDRESS);
-	OLED_write_command(line);
-	OLED_write_command(7);
+	if (l < NUM_LINES){
+		OLED_write_command(SET_PAGE_ADDRESS);
+		line = l;
+		OLED_write_command(line);
+		OLED_write_command(7);
+	}
 }
 
 void OLED_pos(uint8_t row, uint8_t column)
@@ -132,29 +134,47 @@ void OLED_set_contrast( uint8_t level )
 	OLED_write_command(level);
 }
 
-void OLED_print_char( char *character, uint8_t line)
+void OLED_invert_screen()
+{
+	static int inverted;
+	if (!inverted){
+		OLED_write_command(SET_INVERSE_DISPLAY);
+		inverted = 1;
+		}else{
+		OLED_write_command(SET_NORMAL_DISPLAY);
+		inverted = 0;
+	}
+}
+
+void OLED_print_char( char character )
 {	
 	//printf("Character: %c \n", *character);
-	if ((*character) == '\n'){
+	if ((character) == '\n'){
 		//printf("newline\n");
-		OLED_pos(line + 1, 0);
+		OLED_pos((line + 1), 0);
 	}
 	else{
-		int i;
-		for (i = 0; i < 5; i++){
-			OLED_write_data(pgm_read_byte(&font5[*character - ' '][i]));
+		for (int i = 0; i < 5; i++){
+			OLED_write_data(pgm_read_byte(&font5[character - ' '][i]));
 		}
 	}
 }
 
-void OLED_print(char *c, uint8_t line)
+void OLED_print(char *c)
 {
 	int i = 0;
 	while(c[i] != '\0'){
 		//printf("From OLED_print %c \n", c[i]);
-		OLED_print_char(&c[i], line);
+		OLED_print_char(c[i]);
 		i++;
 	}
+}
+
+void OLED_printf(const char* fmt, ...){
+	va_list args;
+	va_start(args, fmt);
+	vfprintf(&oled_stdout, fmt, args);
+	va_end(args);
 }
 
 void OLED_print_arrow( void )

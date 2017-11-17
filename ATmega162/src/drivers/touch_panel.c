@@ -13,23 +13,14 @@
 
 void TOUCH_init( void ){
 	
-	// Initialize PORT B, pin 0, 1 and 2 as input
+	// Initialize PORT B, pin 1 and 2 as input
 	clear_bit(DDRB, PINB1);
 	clear_bit(DDRB, PINB2);
 	
 }
 
 int TOUCH_button( void ){
-	//switch (button) {
-		//case LEFT_BUTTON:
-		//if(test_bit(PINB, PB1)) { return 1; }
-		//break;
-		//case RIGHT_BUTTON:
-		//if(test_bit(PINB, PB2)) { return 1; }
-		//break;
-		//default:
-		//return 0;
-	//}
+
 	if (test_bit(PINB, PB1) || test_bit(PINB, PB2)){
 		return 1;
 	}

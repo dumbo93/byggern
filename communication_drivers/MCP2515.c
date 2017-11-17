@@ -13,7 +13,7 @@
 
 uint8_t MCP_init( void )
 {
-	//SPI_init();
+	SPI_init();
 	//printf("hello from MCP init 1\n");
 	MCP_reset();
 	//printf("hello from MCP init 2\n");

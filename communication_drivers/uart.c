@@ -17,23 +17,7 @@
 #include "uart.h"
 #include <avr/io.h>
 #include <stdio.h>
-#include <util/delay.h>
 
-
-// main fjernes paa sikt naar programmet utvides
-void uart_test( void ){
-	unsigned char msg;
-	
-	UART_Init ( MYUBRR );
-	
-	while(1){
-		msg = UART_Recieve();
-		printf("%c\n", msg);
-		//UART_Transmit('h');
-		//printf("jeg vil sove 'zzzzzzz'\n1 sau, 2 sau, 3 sau ...\n\n");
-		_delay_ms(1000);
-	}
-}
 
 void UART_Init( unsigned int ubrr ){
 	/* 
