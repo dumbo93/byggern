@@ -13,7 +13,7 @@
 #include "drivers/touch_panel.h"
 #include "drivers/send2can.h"
 #include "drivers/timer.h"
-#include "drivers/oled.h"
+//#include "drivers/oled.h"
 #include "../../communication_drivers/uart.h"
 #include "../../communication_drivers/can.h"
 
@@ -31,7 +31,6 @@ int main( void ){
 	int score = 0;
 	
 	cli();
-	// Initializations 
 	UART_Init( MYUBRR );
 	ADC_init();
 	JOY_init();
@@ -78,9 +77,7 @@ int main( void ){
 				break;
 			case game_over:
 				MENU_print_game_over_screen(score);
-				_delay_ms(5000);
-				//save to highscore? 
-					// username and score, place in right place
+				_delay_ms(4000);
 				HIGHSCORE_get_username(username);
 				HIGHSCORE_add_score(score, username, 0);
 				

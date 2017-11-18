@@ -147,6 +147,8 @@ void HIGHSCORE_print()
 {
 	int max_num_highscores = 5;
 	highscore_info_t user;
+	OLED_reset();
+	OLED_printf("Highscores");
 	OLED_pos(1, 0);
 	OLED_printf("#  Score");
 	OLED_goto_column(55);

@@ -17,6 +17,7 @@ typedef struct menu_item_info {
 	menu_item_info_t *parent;
 	menu_item_info_t *child[7];
 	int child_num;
+	void (*functionPtr)(void);
 };
 
 

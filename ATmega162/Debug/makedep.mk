@@ -12,6 +12,8 @@
 
 src\drivers\adc.c
 
+src\drivers\eeprom.c
+
 src\drivers\send2can.c
 
 src\drivers\joystick.c

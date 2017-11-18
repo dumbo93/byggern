@@ -150,6 +150,12 @@
     <Compile Include="src\drivers\adc.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\drivers\eeprom.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\drivers\eeprom.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\drivers\font_normal.h">
       <SubType>compile</SubType>
     </Compile>
