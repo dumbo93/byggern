@@ -13,7 +13,6 @@
 #include "drivers/touch_panel.h"
 #include "drivers/send2can.h"
 #include "drivers/timer.h"
-//#include "drivers/oled.h"
 #include "../../communication_drivers/uart.h"
 #include "../../communication_drivers/can.h"
 
