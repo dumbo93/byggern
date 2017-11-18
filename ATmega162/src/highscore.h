@@ -27,8 +27,10 @@ typedef struct highscore_info {
 void HIGHSCORE_add_score(uint16_t score,char *name, int start);
 highscore_info_t HIGHSCORE_load_from_eeprom(int number);
 void HIGHSCORE_load_to_eeprom(uint16_t score, char *name, int number);
-char HIGHSCORE_get_username();
+void HIGHSCORE_get_username(char* username);
 void HIGHSCORE_print();
 void HIGHSCORE_clear();
+void HIGHSCORE_highlight_letter(int line, int prev_line);
+void HIGHSCORE_print_character_list(char start);
 
 #endif /* HIGHSCORE_H_ */

@@ -129,20 +129,19 @@ void MENU_init( void ){
 	line = 1;
 	MENU_print_menu();
 	MENU_highlight_item();
-	MENU_select_item();
-	MENU_navigate();
 }
 
 
 void MENU_print_menu(){
 	OLED_reset();
-	OLED_printf("%s\n",current_menu->name);
+	OLED_printf("%s",current_menu->name);
 	if (current_child!= NULL){
 		MENU_highlight_item();
 	}
-	for (int i =0; i < current_menu->child_num; i++){
+	for (int i = 0; i < current_menu->child_num; i++){
+		OLED_pos(i + 1, 10);
 		OLED_goto_column(10);
-		OLED_printf("%s\n", current_menu->child[i]->name);
+		OLED_printf("%s", current_menu->child[i]->name);
 	}
 }
 
@@ -184,7 +183,7 @@ void MENU_select_item(){
 				current_child = current_child->child[0];
 				line = 1;
 				OLED_reset();
-				OLED_printf("%s\n", current_menu->name);
+				OLED_printf("%s", current_menu->name);
 				HIGHSCORE_print();
 			}
 		}
@@ -245,7 +244,7 @@ void MENU_print_pause_screen(int remaining_lives)
 {
 	OLED_reset();
 	OLED_pos(3, 20);
-	OLED_printf("You have %d lives left\n", remaining_lives);
+	OLED_printf("You have %d lives left", remaining_lives);
 
 	OLED_pos(5, 20);
 	OLED_printf("Press joystick");
@@ -261,13 +260,14 @@ void MENU_print_game_screen(void){
 void MENU_print_game_over_screen(int score){
 	OLED_reset();
 	OLED_pos(3, 30);
-	OLED_printf("Game over...\n");
+	OLED_printf("Game over...");
+	OLED_pos(4, 30);
 	OLED_printf("You lasted %d seconds", score);
 }
 
 void MENU_print_cleared_highscores(){
 	OLED_reset();
 	OLED_pos(3, 15);
-	OLED_printf("Highscores cleared\n");
+	OLED_printf("Highscores cleared");
 	_delay_ms(2000);
 }

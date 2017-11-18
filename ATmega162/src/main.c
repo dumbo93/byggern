@@ -45,25 +45,8 @@ int main( void ){
 	STATE_OPTION_set(menu);
 	sei();
 	//HIGHSCORE_clear();
-	//HIGHSCORE_add_score(10, "hei",0);
-	//HIGHSCORE_add_score(100, "hallo",0);
-	//HIGHSCORE_add_score(15, "yo",0);
-	//HIGHSCORE_add_score(360, "jippiiii",0);
-	//char testname[12];
-	//testname[0] = 't';
-	//testname[1] = 'e';
-	//testname[2] = 's';
-	//testname[3] = 't';
-	//testname[4] = 't';
-	//testname[5] = 'e';
-	//testname[6] = 's';
-	//testname[7] = 't';
-	//testname[8] = 't';
-	//testname[9] = 'e';
-	//testname[10] = 's';
-	////testname[11] = '\0';
-	//HIGHSCORE_add_score(83, testname,0);
 
+	char username[NUM_USERNAME_BYTES];
 
 	
 	while(1){
@@ -98,7 +81,8 @@ int main( void ){
 				_delay_ms(5000);
 				//save to highscore? 
 					// username and score, place in right place
-				// print a game over screen?
+				HIGHSCORE_get_username(username);
+				HIGHSCORE_add_score(score, username, 0);
 				
 				STATE_OPTION_set(menu);
 				MENU_init();
@@ -119,8 +103,6 @@ int main( void ){
 				}else if (STATE_OPTION_get() == game){
 					score = score + TIMER_stop();
 					STATE_OPTION_set(game_over);
-					
-					//stop timer and save it somewhere
 				}
 				break;
 			default:

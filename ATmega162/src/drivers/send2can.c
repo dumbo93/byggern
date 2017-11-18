@@ -23,7 +23,7 @@ void SEND2CAN_send_joy_pos_x()
 		msg.data[1] = joy_pos.x;
 		msg.length = 2;
 		CAN_msg_send(&msg);
-		printf("\n\nSent joystick position (x): (%d) \n",msg.data[1]);
+		//printf("\n\nSent joystick position (x): (%d) \n",msg.data[1]);
 		prev_joy_pos = joy_pos;
 	}
 }
@@ -40,7 +40,7 @@ void SEND2CAN_send_slider_pos()
 		msg.data[1] = slider_pos.right_slider;
 		msg.length = 2;
 		CAN_msg_send(&msg);
-		printf("\n\nSent slider position: (%d) \n",msg.data[1]);
+		//printf("\n\nSent slider position: (%d) \n",msg.data[1]);
 		prev_slider_pos = slider_pos;
 	}
 	
@@ -58,7 +58,7 @@ void SEND2CAN_touch_button_pressed()
 		msg.data[1] = button_pressed;
 		msg.length = 2;
 		CAN_msg_send(&msg);
-		printf("\n\nSent button press (x): (%d) \n",msg.data[1]);
+		//printf("\n\nSent button press (x): (%d) \n",msg.data[1]);
 	}
 	prev_button_pressed = button_pressed;
 }
