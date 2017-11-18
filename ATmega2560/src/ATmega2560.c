@@ -77,12 +77,14 @@ int main( void ){
 		}
 		
 		val = IR_read();
-		if (val - prev_value < 3){
+		printf("IR val: %d\n", val);
+		if (val - prev_value != 0){
 			if (val == 0){
 				send.id = ATmega2560_ID;
 				send.data[0] = CAN_LIVES;
 				send.length = 1;
 				CAN_msg_send(&send);
+				printf("MESSAGE SENT TO NODE 1\n");
 			}
 			prev_value = val;
 		}
