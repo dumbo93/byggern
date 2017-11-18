@@ -6,13 +6,16 @@
  */ 
 
 #include "menu.h"
+#include "setup.h"
+#include "highscore.h"
 #include "state_option.h"
 #include "drivers/oled.h"
 #include "drivers/joystick.h"
-#include "drivers/sram.h"
+
 
 #include <stdlib.h>
 #include <string.h>
+#include <util/delay.h>
 
 menu_item_info_t main_menu, play_game, highscores, settings, slow_speed, medium_speed, fast_speed, clear_highscores, contrast_level, invert_screen,contrast_low,contrast_medium,contrast_high;
 
@@ -154,7 +157,9 @@ void MENU_select_item(){
 			MENU_print_menu();
 		}else{
 			if(current_child == &clear_highscores){
-				//MENU_clear_highscores();
+				HIGHSCORE_clear();
+				MENU_print_cleared_highscores();
+				MENU_print_menu();
 			}
 			else if(current_child == &contrast_low)
 				OLED_set_contrast( LOW_CONTRAST );
@@ -178,7 +183,9 @@ void MENU_select_item(){
 				current_menu = current_child;
 				current_child = current_child->child[0];
 				line = 1;
-				//HIGHSCORE_print();
+				OLED_reset();
+				OLED_printf("%s\n", current_menu->name);
+				HIGHSCORE_print();
 			}
 		}
 		while(JOY_button() || JOY_get_direction() == RIGHT){}
@@ -256,4 +263,11 @@ void MENU_print_game_over_screen(int score){
 	OLED_pos(3, 30);
 	OLED_printf("Game over...\n");
 	OLED_printf("You lasted %d seconds", score);
+}
+
+void MENU_print_cleared_highscores(){
+	OLED_reset();
+	OLED_pos(3, 15);
+	OLED_printf("Highscores cleared\n");
+	_delay_ms(2000);
 }

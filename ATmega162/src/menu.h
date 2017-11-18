@@ -39,6 +39,8 @@ void MENU_print_game_screen(void);
 
 void MENU_print_game_over_screen(int score);
 
+void MENU_print_cleared_highscores();
+
 
 
 #endif /* MENU_H_ */

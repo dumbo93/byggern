@@ -7,12 +7,13 @@
 #include "setup.h"
 #include "menu.h"
 #include "state_option.h"
-//#include "highscore.h"
+#include "highscore.h"
 #include "drivers/adc.h"
 #include "drivers/joystick.h"
 #include "drivers/touch_panel.h"
 #include "drivers/send2can.h"
 #include "drivers/timer.h"
+#include "drivers/oled.h"
 #include "../../communication_drivers/uart.h"
 #include "../../communication_drivers/can.h"
 
@@ -26,7 +27,7 @@
 int main( void ){
 	can_msg receive;
 	int msg_type;
-	int remaining_lives;
+	int remaining_lives = 3;
 	int score = 0;
 	
 	cli();
@@ -39,12 +40,33 @@ int main( void ){
 	CAN_init();
 	TIMER_init();
 	
+	
 	printf("Init done\n");
 	STATE_OPTION_set(menu);
 	sei();
+	//HIGHSCORE_clear();
+	//HIGHSCORE_add_score(10, "hei",0);
+	//HIGHSCORE_add_score(100, "hallo",0);
+	//HIGHSCORE_add_score(15, "yo",0);
+	//HIGHSCORE_add_score(360, "jippiiii",0);
+	//char testname[12];
+	//testname[0] = 't';
+	//testname[1] = 'e';
+	//testname[2] = 's';
+	//testname[3] = 't';
+	//testname[4] = 't';
+	//testname[5] = 'e';
+	//testname[6] = 's';
+	//testname[7] = 't';
+	//testname[8] = 't';
+	//testname[9] = 'e';
+	//testname[10] = 's';
+	////testname[11] = '\0';
+	//HIGHSCORE_add_score(83, testname,0);
+
+
 	
-	
-	while(1){		
+	while(1){
 
 		switch (STATE_OPTION_get()){
 			case menu:
@@ -105,7 +127,7 @@ int main( void ){
 				break;
 		}
 		
-		_delay_ms(1);
+		_delay_ms(50);
 	}
 	return 0;
 }
