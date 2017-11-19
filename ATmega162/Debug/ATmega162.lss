@@ -2936,6 +2936,8 @@ void HIGHSCORE_get_username(char* username)
     106a:	2f ef       	ldi	r18, 0xFF	; 255
     106c:	82 1a       	sub	r8, r18
     106e:	92 0a       	sbc	r9, r18
+			//OLED_pos(3,50);
+			//OLED_printf("%s",username);
 		}
 		switch(JOY_get_direction()){
     1070:	0e 94 95 04 	call	0x92a	; 0x92a <JOY_get_direction>
@@ -2964,6 +2966,8 @@ void HIGHSCORE_get_username(char* username)
     1092:	81 2f       	mov	r24, r17
     1094:	0e 94 d5 07 	call	0xfaa	; 0xfaa <HIGHSCORE_print_character_list>
     1098:	06 c0       	rjmp	.+12     	; 0x10a6 <HIGHSCORE_get_username+0x8c>
+						//OLED_pos(3,50);
+						//OLED_printf("%s",username);
 				}
 				if (line > 1){
     109a:	c2 30       	cpi	r28, 0x02	; 2
@@ -2989,7 +2993,7 @@ void HIGHSCORE_get_username(char* username)
     10bc:	e1 f7       	brne	.-8      	; 0x10b6 <HIGHSCORE_get_username+0x9c>
     10be:	00 c0       	rjmp	.+0      	; 0x10c0 <HIGHSCORE_get_username+0xa6>
     10c0:	00 c0       	rjmp	.+0      	; 0x10c2 <HIGHSCORE_get_username+0xa8>
-			i++;
+			//OLED_printf("%s",username);
 		}
 		switch(JOY_get_direction()){
 			
@@ -3030,6 +3034,8 @@ void HIGHSCORE_get_username(char* username)
     10e8:	1a 2d       	mov	r17, r10
 					if (line == 7)
 						HIGHSCORE_print_character_list(ch - 6);
+						//OLED_pos(3,50);
+						//OLED_printf("%s",username);
 				}
 				if (line < 7){
     10ea:	c7 30       	cpi	r28, 0x07	; 7

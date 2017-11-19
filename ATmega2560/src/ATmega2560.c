@@ -16,7 +16,6 @@
 #include "drivers/solenoid.h"
 #include "drivers/motor.h"
 
-#include "count_score.h"
 #include "controller.h"
 
 #include <stdlib.h>

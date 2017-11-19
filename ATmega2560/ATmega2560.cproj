@@ -152,12 +152,6 @@
     <Compile Include="src\controller.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\count_score.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\count_score.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="src\drivers\adc_2560.c">
       <SubType>compile</SubType>
     </Compile>

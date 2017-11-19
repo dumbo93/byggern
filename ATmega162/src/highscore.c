@@ -76,6 +76,8 @@ void HIGHSCORE_get_username(char* username)
 			while(JOY_button());
 			username[i] = ch;
 			i++;
+			//OLED_pos(3,50);
+			//OLED_printf("%s",username);
 		}
 		switch(JOY_get_direction()){
 			
@@ -85,6 +87,8 @@ void HIGHSCORE_get_username(char* username)
 					ch--;
 					if (line == 1)
 						HIGHSCORE_print_character_list(ch);
+						//OLED_pos(3,50);
+						//OLED_printf("%s",username);
 				}
 				if (line > 1){
 					prev_line = line;
@@ -101,6 +105,8 @@ void HIGHSCORE_get_username(char* username)
 					ch++;
 					if (line == 7)
 						HIGHSCORE_print_character_list(ch - 6);
+						//OLED_pos(3,50);
+						//OLED_printf("%s",username);
 				}
 				if (line < 7){
 					prev_line = line;
