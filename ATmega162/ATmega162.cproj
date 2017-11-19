@@ -144,6 +144,27 @@
     <Compile Include="src\bit_manipulation.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\buzzer_driver\music.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\buzzer_driver\pwm.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\buzzer_driver\pwm.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\buzzer_driver\sound.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\buzzer_driver\sound.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\buzzer_driver\sound_frequency.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\buzzer_driver\sound_frequency.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\drivers\adc.c">
       <SubType>compile</SubType>
     </Compile>
@@ -227,6 +248,7 @@
     <Folder Include="src" />
     <Folder Include="src\drivers" />
     <Folder Include="src\communication_drivers" />
+    <Folder Include="src\buzzer_driver" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>

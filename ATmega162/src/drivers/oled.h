@@ -62,5 +62,11 @@ void OLED_print_arrow( void );
 void OLED_printf(const char* fmt, ...);
 void OLED_smiley();
 
+//void OLED_SRAM_flush();
+//void OLED_SRAM_clear_line(uint8_t line);
+//void OLED_SRAM_clear_screen();
+//void OLED_SRAM_write_char(char c, uint8_t line, uint16_t col);
+//void OLED_SRAM_write(const char* fmt, uint8_t line, uint16_t col, ...);
+
 
 #endif /* OLED_H_ */

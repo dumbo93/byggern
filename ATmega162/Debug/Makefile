@@ -35,7 +35,8 @@ LINKER_SCRIPT_DEP:=
 SUBDIRS :=  \
 ../src \
 ../src/drivers \
-../src/communication_drivers
+../src/communication_drivers \
+../src/buzzer_driver
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
@@ -44,6 +45,9 @@ C_SRCS +=  \
 ../../communication_drivers/MCP2515.c \
 ../../communication_drivers/spi.c \
 ../../communication_drivers/uart.c \
+../src/buzzer_driver/pwm.c \
+../src/buzzer_driver/sound.c \
+../src/buzzer_driver/sound_frequency.c \
 ../src/drivers/adc.c \
 ../src/drivers/eeprom.c \
 ../src/drivers/send2can.c \
@@ -69,6 +73,9 @@ src/communication_drivers/can.o \
 src/communication_drivers/MCP2515.o \
 src/communication_drivers/spi.o \
 src/communication_drivers/uart.o \
+src/buzzer_driver/pwm.o \
+src/buzzer_driver/sound.o \
+src/buzzer_driver/sound_frequency.o \
 src/drivers/adc.o \
 src/drivers/eeprom.o \
 src/drivers/send2can.o \
@@ -87,6 +94,9 @@ src/communication_drivers/can.o \
 src/communication_drivers/MCP2515.o \
 src/communication_drivers/spi.o \
 src/communication_drivers/uart.o \
+src/buzzer_driver/pwm.o \
+src/buzzer_driver/sound.o \
+src/buzzer_driver/sound_frequency.o \
 src/drivers/adc.o \
 src/drivers/eeprom.o \
 src/drivers/send2can.o \
@@ -105,6 +115,9 @@ src/communication_drivers/can.d \
 src/communication_drivers/MCP2515.d \
 src/communication_drivers/spi.d \
 src/communication_drivers/uart.d \
+src/buzzer_driver/pwm.d \
+src/buzzer_driver/sound.d \
+src/buzzer_driver/sound_frequency.d \
 src/drivers/adc.d \
 src/drivers/eeprom.d \
 src/drivers/send2can.d \
@@ -123,6 +136,9 @@ src/communication_drivers/can.d \
 src/communication_drivers/MCP2515.d \
 src/communication_drivers/spi.d \
 src/communication_drivers/uart.d \
+src/buzzer_driver/pwm.d \
+src/buzzer_driver/sound.d \
+src/buzzer_driver/sound_frequency.d \
 src/drivers/adc.d \
 src/drivers/eeprom.d \
 src/drivers/send2can.d \
@@ -183,7 +199,20 @@ LINKER_SCRIPT_DEP+=
 
 
 
+
+
+
+
+
+
 src/communication_drivers/%.o: ../../communication_drivers/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.8.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+src/buzzer_driver/%.o: ../src/buzzer_driver/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.8.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.1061\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

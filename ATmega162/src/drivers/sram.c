@@ -21,7 +21,7 @@ void SRAM_init(void){
 	SFIOR |= (4 << XMM0);
 }
 
-void SRAM_save(uint8_t saved_value, uint16_t address)
+void SRAM_write(uint8_t saved_value, uint16_t address)
 {
 	volatile char *ext_ram = (char *) SRAM_DATA_ADDRESS;
 	if (address < ext_ram_size){
@@ -30,7 +30,7 @@ void SRAM_save(uint8_t saved_value, uint16_t address)
 	
 }
 
-uint8_t SRAM_retrieve(uint16_t address)
+uint8_t SRAM_read(uint16_t address)
 {
 	volatile char *ext_ram = (char *) SRAM_DATA_ADDRESS;
 	if (address < ext_ram_size){

@@ -10,6 +10,9 @@
 #include <avr/io.h>
 #include <stdio.h>
 #include "font_normal.h"
+#include "sram.h"
+
+#include "../../../communication_drivers/uart.h"
 
 volatile uint8_t *oled_cmd = (uint8_t *) OLED_COMMAND_ADDRESS;	// Start address for the OLED command
 volatile uint8_t *oled_data = (uint8_t *) OLED_DATA_ADDRESS;	// Start address for the OLED data
@@ -219,5 +222,57 @@ void OLED_smiley()
 	OLED_pos(6, 57);
 	for (int col = 0; col < 13; col++){
 		OLED_write_data(0xFF);
+	}
+}
+
+
+void OLED_SRAM_flush()
+{
+	uint8_t data;
+	for (uint8_t line = 0; line < NUM_LINES; line++){
+		for (uint16_t col = 0; col < NUM_COLUMNS; col++){
+			data = SRAM_read(line*NUM_COLUMNS + col);
+			OLED_write_data(data);
+		}
+	}
+}
+
+void OLED_SRAM_clear_line(uint8_t line)
+{
+	uint16_t start = line*NUM_COLUMNS;
+	for (uint16_t col = 0; col < NUM_COLUMNS; col++){
+		SRAM_write(0x00, start + col);
+	}
+}
+
+void OLED_SRAM_clear_screen()
+{
+	for (uint8_t line = 0; line < NUM_LINES; line++){
+		OLED_SRAM_clear_line(line);
+	}
+}
+
+void OLED_SRAM_write_char(char c, uint8_t line, uint16_t col)
+{
+	uint16_t start = line*NUM_COLUMNS + col;
+	for (int i = 0; i < 5; i++){
+		SRAM_write(pgm_read_byte(&font5[c - ' '][i]), start + i);
+	}
+}
+
+void OLED_SRAM_write(const char* fmt, uint8_t line, uint16_t col, ...)
+{
+	va_list args;
+	char str[30];
+	va_start(args, fmt);
+	sprintf(str, fmt, args);
+	va_end(args);
+	printf("%s\n", str);
+	
+	char c = str[0];
+	int index = 0;
+	while(c != '\0'){
+		OLED_SRAM_write_char(c, line, col++);
+		c = str[++index];
 	}
 }

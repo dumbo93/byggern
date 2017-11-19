@@ -15,6 +15,10 @@
 #include "drivers/timer.h"
 #include "../../communication_drivers/uart.h"
 #include "../../communication_drivers/can.h"
+#include "buzzer_driver/sound.h"
+
+
+//#include "drivers/oled.h"
 
 #include <avr/io.h>
 #include <util/delay.h>
@@ -37,75 +41,90 @@ int main( void ){
 	MENU_init();
 	CAN_init();
 	TIMER_init();
+	SOUND_duration_init();
 	
 	
 	printf("Init done\n");
 	STATE_OPTION_set(menu);
 	sei();
 	//HIGHSCORE_clear();
+	
+	//OLED_init();
+	//OLED_SRAM_clear_screen();
+	////OLED_SRAM_write_char('t', 5,5);
+	//OLED_SRAM_write("Test", 0, 0);
+	//OLED_SRAM_flush();
 
 	char username[NUM_USERNAME_BYTES];
 
+	SOUND_start_song(1);
+	//SOUND_timer0_start();
+	//SOUND_start_note(300, 15);
 	
 	while(1){
-
-		switch (STATE_OPTION_get()){
-			case menu:
-				MENU_select_item();
-				MENU_navigate();
-				break;
-			case game_init:
-				SEND2CAN_send_speed(STATE_OPTION_get_speed());
-				MENU_print_game_screen();
-				remaining_lives = 3;
-				score = 0;
-				TIMER_start();
-				STATE_OPTION_set(game);
-				break;
-			case game:
-				SEND2CAN_send_joy_pos_x();
-				SEND2CAN_send_slider_pos();
-				SEND2CAN_touch_button_pressed();
-				break;
-			case game_pause:
-				if(JOY_button()){
-					STATE_OPTION_set(game);
-					MENU_print_game_screen();
-					TIMER_start();
-				}
-				break;
-			case game_over:
-				MENU_print_game_over_screen(score);
-				_delay_ms(4000);
-				HIGHSCORE_get_username(username);
-				HIGHSCORE_add_score(score, username, 0);
-				
-				STATE_OPTION_set(menu);
-				MENU_init();
-				break;
-			default:
-				STATE_OPTION_set(menu);
-				break;
-		}
-		CAN_handle_interrupt(&receive);
-		msg_type = receive.data[0];
-		switch(msg_type){
-			case CAN_LIVES:
-				if(remaining_lives > 1 && STATE_OPTION_get() == game){
-					score = score + TIMER_stop();
-					remaining_lives = remaining_lives - 1;
-					STATE_OPTION_set(game_pause);
-					MENU_print_pause_screen(remaining_lives);
-				}else if (STATE_OPTION_get() == game){
-					score = score + TIMER_stop();
-					STATE_OPTION_set(game_over);
-				}
-				break;
-			default:
-				break;
-		}
+		//SOUND_play_note();
+		//_delay_ms(50);
+		//SOUND_stop_note();
+		//_delay_ms(50);
 		
-		_delay_ms(50);
+		//SOUND_start_note(440, 50);
+		//switch (STATE_OPTION_get()){
+			//case menu:
+				//MENU_select_item();
+				//MENU_navigate();
+				//break;
+			//case game_init:
+				//SEND2CAN_send_speed(STATE_OPTION_get_speed());
+				//MENU_print_game_screen();
+				//remaining_lives = 3;
+				//score = 0;
+				//TIMER_start();
+				//STATE_OPTION_set(game);
+				//break;
+			//case game:
+				//SEND2CAN_send_joy_pos_x();
+				//SEND2CAN_send_slider_pos();
+				//SEND2CAN_touch_button_pressed();
+				//break;
+			//case game_pause:
+				//if(JOY_button()){
+					//STATE_OPTION_set(game);
+					//MENU_print_game_screen();
+					//TIMER_start();
+				//}
+				//break;
+			//case game_over:
+				//MENU_print_game_over_screen(score);
+				//_delay_ms(4000);
+				//HIGHSCORE_get_username(username);
+				//HIGHSCORE_add_score(score, username, 0);
+				//
+				//STATE_OPTION_set(menu);
+				//MENU_init();
+				//break;
+			//default:
+				//STATE_OPTION_set(menu);
+				//break;
+		//}
+		//CAN_handle_interrupt(&receive);
+		//msg_type = receive.data[0];
+		//switch(msg_type){
+			//case CAN_LIVES:
+				//if(remaining_lives > 1 && STATE_OPTION_get() == game){
+					//score = score + TIMER_stop();
+					//remaining_lives = remaining_lives - 1;
+					//STATE_OPTION_set(game_pause);
+					//MENU_print_pause_screen(remaining_lives);
+				//}else if (STATE_OPTION_get() == game){
+					//score = score + TIMER_stop();
+					//STATE_OPTION_set(game_over);
+				//}
+				//break;
+			//default:
+				//break;
+		//}
+		//
+		//_delay_ms(50);
 	}
 	return 0;
 }
