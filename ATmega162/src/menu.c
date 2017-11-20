@@ -11,36 +11,39 @@
 #include "state_option.h"
 #include "drivers/oled.h"
 #include "drivers/joystick.h"
+#include "buzzer_driver/buzz.h"
 
 
 #include <stdlib.h>
 #include <string.h>
 #include <util/delay.h>
 
-menu_item_info_t main_menu, play_game, highscores, settings, slow_speed, medium_speed, fast_speed, clear_highscores, contrast_level, invert_screen,contrast_low,contrast_medium,contrast_high;
+menu_item_info_t main_menu, play_game, highscores, settings, buzzify, mario, starwars, stop, normal_speed, fast_speed, clear_highscores, contrast_level, invert_screen, contrast_low, contrast_medium, contrast_high;
 
 void contrast_low_func(){ OLED_set_contrast( LOW_CONTRAST ); }
 void contrast_medium_func(){ OLED_set_contrast( MEDIUM_CONTRAST ); }
 void contrast_high_func(){ OLED_set_contrast( HIGH_CONTRAST ); }
-void slow_speed_func(){ STATE_OPTION_set_speed(1); STATE_OPTION_set(game_init); }
-void medium_speed_func(){ STATE_OPTION_set_speed(2); STATE_OPTION_set(game_init); }
-void fast_speed_func(){ STATE_OPTION_set_speed(3); STATE_OPTION_set(game_init); }
+void normal_speed_func(){ STATE_OPTION_set_speed(1); STATE_OPTION_set(game_init); }
+void fast_speed_func(){ STATE_OPTION_set_speed(2); STATE_OPTION_set(game_init); }
+void play_mario_func(){ BUZZ_start_song(0); }
+void play_sw_func(){ BUZZ_start_song(1); }
+void stop_music_func(){ BUZZ_stop_song(); }
 	
 menu_item_info_t main_menu ={
 	.name = "Main menu",
 	.child[0] = &play_game,
 	.child[1] = &highscores,
 	.child[2] = &settings,
-	.child_num = 3,
+	.child[3] = &buzzify,
+	.child_num = 4,
 };
 
 menu_item_info_t play_game = {
 	.name = "Play game",
 	.parent = &main_menu,
-	.child[0] = &slow_speed,
-	.child[1] = &medium_speed,
-	.child[2] = &fast_speed,
-	.child_num = 3,
+	.child[0] = &normal_speed,
+	.child[1] = &fast_speed,
+	.child_num = 2,
 };
 
 menu_item_info_t highscores ={
@@ -59,20 +62,21 @@ menu_item_info_t settings ={
 	.child_num = 3,
 };
 
-menu_item_info_t slow_speed = {
-	.name = "Slow",
-	.parent = &play_game,
-	.child_num = 0,
-	.functionPtr = &slow_speed_func,
+menu_item_info_t buzzify ={
+	.name = "Buzzify",
+	.parent = &main_menu,
+	.child[0] = &mario,
+	.child[1] = &starwars,
+	.child[2] = &stop,
+	.child_num = 3,
 };
 
-menu_item_info_t medium_speed = {
-	.name = "Medium",
+menu_item_info_t normal_speed = {
+	.name = "Normal",
 	.parent = &play_game,
 	.child_num = 0,
-	.functionPtr = &medium_speed_func,
+	.functionPtr = &normal_speed_func,
 };
-
 menu_item_info_t fast_speed = {
 	.name = "Fast",
 	.parent = &play_game,
@@ -86,7 +90,6 @@ menu_item_info_t clear_highscores ={
 	.child_num = 0,
 	.functionPtr = &HIGHSCORE_clear,
 };
-
 menu_item_info_t contrast_level ={
 	.name = "Contrast level",
 	.parent = &settings,
@@ -95,7 +98,6 @@ menu_item_info_t contrast_level ={
 	.child[2] = &contrast_high,
 	.child_num = 3,
 };
-
 menu_item_info_t invert_screen ={
 	.name = "Invert screen",
 	.parent = &settings,
@@ -120,6 +122,25 @@ menu_item_info_t contrast_high ={
 	.parent = &contrast_level,
 	.child_num = 0,
 	.functionPtr = &contrast_high_func,
+};
+
+menu_item_info_t mario = {
+	.name = "Super Mario",
+	.parent = &buzzify,
+	.child_num = 0,
+	.functionPtr = &play_mario_func,
+};
+menu_item_info_t starwars = {
+	.name = "Star Wars",
+	.parent = &buzzify,
+	.child_num = 0,
+	.functionPtr = &play_sw_func,
+};
+menu_item_info_t stop = {
+	.name = "Stop music",
+	.parent = &buzzify,
+	.child_num = 0,
+	.functionPtr = &stop_music_func,
 };
 
 menu_item_info_t *current_menu;

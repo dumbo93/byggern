@@ -33,7 +33,7 @@ int CAN_init()
 	
 	uint8_t value = MCP_read(MCP_CANSTAT);
 	if ((value & MODE_MASK) != MODE_NORMAL){
-		printf("MCP2515 is NOT in normal mode after CAN init\n");
+		//printf("MCP2515 is NOT in normal mode after CAN init\n");
 		return 1;
 	}
 	
@@ -90,25 +90,19 @@ void CAN_msg_receive(can_msg *msg, uint8_t reg)
 
 void CAN_handle_interrupt(can_msg *msg)
 {
-	//printf("EFLG: %x\n", MCP_read(MCP_EFLG));
-	//printf("RXB0CTRL: %x\n", MCP_read(MCP_RXB0CTRL));
 	switch(interrupt_flag){
 		case no_flag:
-		//printf("no interrupt 1\n");
 			msg->data[0] = CAN_NO_MESSAGE;
 			break;
 		case RX0:
 			CAN_msg_receive(msg, MCP_RXB0CTRL);
 			interrupt_flag = no_flag;
-			//printf("interrupt handled 1\n");
 			break;
 		case RX1:
 			CAN_msg_receive(msg, MCP_RXB1CTRL);
 			interrupt_flag = no_flag;
-			//printf("interrupt handled 2\n");
 			break;
 		default:
-		//printf("no interrupt 2\n");
 			break;
 	}
 }

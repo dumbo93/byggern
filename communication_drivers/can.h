@@ -19,8 +19,11 @@ typedef struct can_msg{
 	
 enum interrupt_flags {no_flag, RX0, RX1};
 
-#define ATmega162_ID	1
-#define ATmega2560_ID	2
+#define ATmega2560_ID	1
+#define TOUCH_BUTTON_ID	2
+#define SLIDER_ID		3
+#define JOYSTICK_ID		4
+#define GAME_SPEED_ID	5
 
 // Message types
 #define CAN_JOY_POS_X		0x00

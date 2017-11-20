@@ -10,7 +10,6 @@
 #include "drivers/joystick.h"
 #include "setup.h"
 #include <util/delay.h>
-
 #include <stdlib.h>
 
 //When we use add_score somewhere else in the project, start = 0
@@ -30,8 +29,11 @@ void HIGHSCORE_add_score(uint16_t score, char *name, int start)
 			break;
 		}
 		else if (element.score > score){
-			if (start == 0 && i == 4){
-				OLED_printf("%s is not in the top 6", name);
+			if (start == 0 && i == MAX_SCORES-1){
+				OLED_reset();
+				OLED_pos(4,0);
+				OLED_printf(" %s is \n not in the top 6", name);
+				_delay_ms(3000);
 			}
 		}
 	 }
@@ -76,8 +78,6 @@ void HIGHSCORE_get_username(char* username)
 			while(JOY_button());
 			username[i] = ch;
 			i++;
-			//OLED_pos(3,50);
-			//OLED_printf("%s",username);
 		}
 		switch(JOY_get_direction()){
 			
@@ -87,8 +87,6 @@ void HIGHSCORE_get_username(char* username)
 					ch--;
 					if (line == 1)
 						HIGHSCORE_print_character_list(ch);
-						//OLED_pos(3,50);
-						//OLED_printf("%s",username);
 				}
 				if (line > 1){
 					prev_line = line;

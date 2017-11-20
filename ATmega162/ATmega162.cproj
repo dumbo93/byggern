@@ -144,6 +144,12 @@
     <Compile Include="src\bit_manipulation.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\buzzer_driver\buzz.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\buzzer_driver\buzz.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\buzzer_driver\music.h">
       <SubType>compile</SubType>
     </Compile>
@@ -151,18 +157,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\buzzer_driver\pwm.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\buzzer_driver\sound.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\buzzer_driver\sound.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\buzzer_driver\sound_frequency.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\buzzer_driver\sound_frequency.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\drivers\adc.c">

@@ -10,11 +10,9 @@
 
 ..\communication_drivers\uart.c
 
+src\buzzer_driver\buzz.c
+
 src\buzzer_driver\pwm.c
-
-src\buzzer_driver\sound.c
-
-src\buzzer_driver\sound_frequency.c
 
 src\drivers\adc.c
 

@@ -62,30 +62,30 @@
 
 const float PROGMEM frequency[2][80] = {
 	//Super Mario:
-	{NOTE_E7, NOTE_E7, 0, NOTE_E7,
-	0, NOTE_C7, NOTE_E7, 0,
-	NOTE_G7, 0, 0,  0,
-	NOTE_G6, 0, 0, 0,
+	{NOTE_E5, NOTE_E5, 0, NOTE_E5,
+	0, NOTE_C5, NOTE_E5, 0,
+	NOTE_G5, 0, 0,  0,
+	NOTE_G4, 0, 0, 0,
 	
-	NOTE_C7, 0, 0, NOTE_G6,
-	0, 0, NOTE_E6, 0,
-	0, NOTE_A6, 0, NOTE_B6,
-	0, NOTE_AS6, NOTE_A6, 0,
+	NOTE_C5, 0, 0, NOTE_G4,
+	0, 0, NOTE_E4, 0,
+	0, NOTE_A4, 0, NOTE_B4,
+	0, NOTE_AS4, NOTE_A4, 0,
 	
-	NOTE_G6, NOTE_E7, NOTE_G7,
-	NOTE_A7, 0, NOTE_F7, NOTE_G7,
-	0, NOTE_E7, 0, NOTE_C7,
-	NOTE_D7, NOTE_B6, 0, 0,
+	NOTE_G4, NOTE_E5, NOTE_G5,
+	NOTE_A5, 0, NOTE_F5, NOTE_G5,
+	0, NOTE_E5, 0, NOTE_C5,
+	NOTE_D5, NOTE_B4, 0, 0,
 	
-	NOTE_C7, 0, 0, NOTE_G6,
-	0, 0, NOTE_E6, 0,
-	0, NOTE_A6, 0, NOTE_B6,
-	0, NOTE_AS6, NOTE_A6, 0,
+	NOTE_C5, 0, 0, NOTE_G4,
+	0, 0, NOTE_E4, 0,
+	0, NOTE_A4, 0, NOTE_B4,
+	0, NOTE_AS4, NOTE_A4, 0,
 	
-	NOTE_G6, NOTE_E7, NOTE_G7,
-	NOTE_A7, 0, NOTE_F7, NOTE_G7,
-	0, NOTE_E7, 0, NOTE_C7,
-	NOTE_D7, NOTE_B6, 0, 0},
+	NOTE_G4, NOTE_E5, NOTE_G5,
+	NOTE_A5, 0, NOTE_F5, NOTE_G5,
+	0, NOTE_E5, 0, NOTE_C5,
+	NOTE_D5, NOTE_B4, 0, 0},
 	
 	//Star wars, imperial march:
 	{
@@ -129,10 +129,10 @@ const uint8_t PROGMEM duration[2][80] = {
 	 12, 12, 12, 12,
 	 12, 12, 12, 12,
 	 
-	 9, 9, 9,
+	 9, 9, 9, 
 	 12, 12, 12, 12,
 	 12, 12, 12, 12,
-	 12, 12, 12, 12},
+	 12, 12, 12, 12,},
 	 
 	 //Star wars, imperial march:
 	 {

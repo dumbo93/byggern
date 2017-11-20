@@ -55,11 +55,11 @@ int main( void ){
 		msg_type = receive.data[0];
 		switch(msg_type){
 			case CAN_JOY_POS_X:
-				printf("\n\nReceived joystick position: (%d) \n",receive.data[1]);
+				//printf("\n\nReceived joystick position: (%d) \n",receive.data[1]);
 				SERVO_set_position(receive.data[1]);
 				break;
 			case CAN_SLIDER_POS_R:
-				printf("\n\nReceived slider pos (x): (%d) \n", receive.data[1]);
+				//printf("\n\nReceived slider pos (x): (%d) \n", receive.data[1]);
 				reference = CONTROLLER_set_reference(receive.data[1]);
 				break;
 			case CAN_TOUCH_BUTTON:
@@ -67,23 +67,22 @@ int main( void ){
 				
 				break;
 			case CAN_SPEED:
-				printf("Starting game\n");
-				MOTOR_set_max_velocity(receive.data[1]);
 				MOTOR_find_limits();
+				MOTOR_set_max_velocity(receive.data[1]);
 				break;
 			default:
 				break;
 		}
 		
 		val = IR_read();
-		printf("IR val: %d\n", val);
+		//printf("IR val: %d\n", val);
 		if (val - prev_value != 0){
 			if (val == 0){
 				send.id = ATmega2560_ID;
 				send.data[0] = CAN_LIVES;
 				send.length = 1;
 				CAN_msg_send(&send);
-				printf("MESSAGE SENT TO NODE 1\n");
+				//printf("MESSAGE SENT TO NODE 1\n");
 			}
 			prev_value = val;
 		}

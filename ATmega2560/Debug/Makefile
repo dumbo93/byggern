@@ -46,7 +46,6 @@ C_SRCS +=  \
 ../../communication_drivers/uart.c \
 ../src/ATmega2560.c \
 ../src/controller.c \
-../src/count_score.c \
 ../src/drivers/adc_2560.c \
 ../src/drivers/counter.c \
 ../src/drivers/ir.c \
@@ -70,7 +69,6 @@ src/communication_drivers/spi.o \
 src/communication_drivers/uart.o \
 src/ATmega2560.o \
 src/controller.o \
-src/count_score.o \
 src/drivers/adc_2560.o \
 src/drivers/counter.o \
 src/drivers/ir.o \
@@ -87,7 +85,6 @@ src/communication_drivers/spi.o \
 src/communication_drivers/uart.o \
 src/ATmega2560.o \
 src/controller.o \
-src/count_score.o \
 src/drivers/adc_2560.o \
 src/drivers/counter.o \
 src/drivers/ir.o \
@@ -104,7 +101,6 @@ src/communication_drivers/spi.d \
 src/communication_drivers/uart.d \
 src/ATmega2560.d \
 src/controller.d \
-src/count_score.d \
 src/drivers/adc_2560.d \
 src/drivers/counter.d \
 src/drivers/ir.d \
@@ -121,7 +117,6 @@ src/communication_drivers/spi.d \
 src/communication_drivers/uart.d \
 src/ATmega2560.d \
 src/controller.d \
-src/count_score.d \
 src/drivers/adc_2560.d \
 src/drivers/counter.d \
 src/drivers/ir.d \
@@ -145,8 +140,6 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
-
-
 
 
 

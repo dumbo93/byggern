@@ -11,6 +11,9 @@
 
 #define NEGATIVE 0
 #define POSITIVE 1
+
+void SEND2CAN_init();
+void SEND2CAN_send_messages();
 void SEND2CAN_send_joy_pos_x();
 void SEND2CAN_send_slider_pos();
 void SEND2CAN_touch_button_pressed();

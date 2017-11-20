@@ -20,7 +20,6 @@ void CONTROLLER_init_timer()
 {
 	// OC3A disconnected. Normal port operation	
 	// Normal mode (mode 0) (everything is zero initially)
-
 	
 	// Set prescaler to 1/64
 	TCCR3B |= (1 << CS31) | (1 << CS30);
@@ -36,9 +35,7 @@ void CONTROLLER_init_timer()
 int CONTROLLER_set_reference(uint8_t reference)
 {
 	int reff;
-	//printf("\nReference: (%d)\n", reference);
 	reff = abs(reference - 0xFF); // 255 is rightmost position, 0 is leftmost position
-	//printf("\n\nReference: (%d) \n", (int)reff);
 	return reff;
 	
 }
@@ -62,11 +59,6 @@ int CONTROLLER_run(int y, int reference)
 			}
 			derivative = (error - prev_err)/dt;
 			u = Kp*error + Ki*integral + Kd*derivative;
-			//printf("\nInput u: %d\n", (int)u/100);
-			//printf("Output y: %d\n", (int)y);
-			//printf("Reference: %d\n", (int)reference);
-			//printf("Error: %d\n", (int)error);
-			//printf("Integral: %d\n", (int)integral/10);
 			prev_err = error;
 			run_controller_flag = 0;
 			break;

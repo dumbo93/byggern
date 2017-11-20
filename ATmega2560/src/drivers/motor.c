@@ -38,6 +38,7 @@ void MOTOR_find_limits( void )
 {
 	// *** Calibrate ***
 	MOTOR_set_dir(1);
+	max_velocity = init_velocity;
 	MOTOR_set_velocity(init_velocity);
 	_delay_ms(2000);
 	MOTOR_set_velocity(0);
@@ -67,23 +68,19 @@ void MOTOR_set_dir(int dir)
 		// retning venstre 
 		PORTH &= ~(1 << PH1);
 	}
-	//else{
-		//perror("Invalid motor direction: ");
-	//}
 }
 
 void MOTOR_set_max_velocity(int speed){
 	switch (speed){
 		case 1:
-			max_velocity = 0x40;
-			break;
-		case 2:
 			max_velocity = 0x60;
 			break;
-		case 3:
+		case 2:
 			max_velocity = 0x80;
 			break;
-		
+		default:
+			max_velocity = 0x60;
+			break;
 	}
 }
 
@@ -127,7 +124,6 @@ int16_t MOTOR_read_encoder(void)
 	
 	// Process received data
 	int16_t total_encoder_value = encoder_value_MSB << 8 | encoder_value_LSB;
-	//printf("\tEncoder value: %x\n", total_encoder_value);
 	
 	return total_encoder_value;
 	
@@ -136,7 +132,5 @@ int16_t MOTOR_read_encoder(void)
 int MOTOR_read_scaled_encoder()
 {
 	float encoder_value = (float)MOTOR_read_encoder()/MOTOR_max_encoder_value * 0xFF; //Scaled between 0 and 255
-	//encoder_value = abs(encoder_value - 255.0); // 255 is rightmost position, 0 is leftmost position
-	//printf("\tScaled encoder value: %d\n", (int)encoder_value);
 	return (int)encoder_value;
 }

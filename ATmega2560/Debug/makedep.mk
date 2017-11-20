@@ -14,8 +14,6 @@ src\ATmega2560.c
 
 src\controller.c
 
-src\count_score.c
-
 src\drivers\adc_2560.c
 
 src\drivers\counter.c
