@@ -253,10 +253,10 @@ void MENU_highlight_item( void )
 void MENU_print_pause_screen(int remaining_lives)
 {
 	OLED_reset();
-	OLED_pos(3, 20);
+	OLED_pos(3, 10);
 	OLED_printf("You have %d lives left", remaining_lives);
 
-	OLED_pos(5, 20);
+	OLED_pos(5, 10);
 	OLED_printf("Press joystick");
 
 }
@@ -271,7 +271,7 @@ void MENU_print_game_screen( void )
 void MENU_print_game_over_screen(int score)
 {
 	OLED_reset();
-	OLED_pos(3, 30);
+	OLED_pos(3, 35);
 	OLED_printf("Game over...");
 	OLED_pos(4, 10);
 	OLED_printf("You lasted %d seconds", score);

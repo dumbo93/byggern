@@ -71,13 +71,13 @@ ISR(TIMER3_COMPA_vect)
 		number++;
 		switch(current_song){
 			case 0: // mario
-				if (number == 79){
+				if (number == 78){
 					number = 0;
 				}
 				break;
 		
 			case 1: // star wars
-				if (number == 75){
+				if (number == 74){
 					number = 0;
 				}
 				break;
@@ -85,6 +85,7 @@ ISR(TIMER3_COMPA_vect)
 			default:
 				break;
 		}
+		printf("NUmber: %d\n", number);
 		BUZZ_start_note(pgm_read_float(&frequency[current_song][number]), pgm_read_byte(&duration[current_song][number]));
 	}
 	else{
