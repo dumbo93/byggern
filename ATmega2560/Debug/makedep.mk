@@ -16,7 +16,7 @@ src\controller.c
 
 src\drivers\adc_2560.c
 
-src\drivers\counter.c
+src\drivers\pwm.c
 
 src\drivers\ir.c
 

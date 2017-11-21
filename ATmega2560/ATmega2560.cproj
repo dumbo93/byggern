@@ -158,10 +158,10 @@
     <Compile Include="src\drivers\adc_2560.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\drivers\counter.c">
+    <Compile Include="src\drivers\pwm.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\drivers\counter.h">
+    <Compile Include="src\drivers\pwm.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\drivers\ir.c">

@@ -12,7 +12,7 @@
 
 src\buzzer_driver\buzz.c
 
-src\buzzer_driver\pwm.c
+src\buzzer_driver\frequency_generator.c
 
 src\drivers\adc.c
 

@@ -153,10 +153,10 @@
     <Compile Include="src\buzzer_driver\music.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\buzzer_driver\pwm.c">
+    <Compile Include="src\buzzer_driver\frequency_generator.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\buzzer_driver\pwm.h">
+    <Compile Include="src\buzzer_driver\frequency_generator.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\drivers\adc.c">

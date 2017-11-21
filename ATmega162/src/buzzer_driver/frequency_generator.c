@@ -1,18 +1,17 @@
 /*
- * pwm.c
+ * frequency_generator.c
  *
  * Created: 19.11.2017 16:38:20
  *  Author: ingunnjv
  */ 
 
-#include "pwm.h"
+#include "frequency_generator.h"
 #include "../setup.h"
 #include <util/delay.h>
 
 
-void PWM_init(void)
+void FREQUENCY_GENERATOR_init(void)
 {
-	
 	//Timer0-ctc mode and prescaler=64
 	TCCR0 |= (1<<WGM01);
 	TCCR0 &= ~(1<<WGM00);
@@ -23,7 +22,8 @@ void PWM_init(void)
 
 }
 
-void PWM_start(uint8_t start){
+void FREQUENCY_GENERATOR_start(uint8_t start)
+{
 	if (start > 0){
 		// prescaler=64
 		TCCR0 |= (1<<CS01) | (1<<CS00);
@@ -35,15 +35,15 @@ void PWM_start(uint8_t start){
 	}
 }
 
-void PWM_play(uint8_t match){
-	
+void FREQUENCY_GENERATOR_play(uint8_t match)
+{
 	if (match > 0){
-		PWM_start(0);
+		FREQUENCY_GENERATOR_start(0);
 		_delay_ms(2);
 		OCR0 = match;
-		PWM_start(1);
+		FREQUENCY_GENERATOR_start(1);
 	}
 	else{
-		PWM_start(0);
+		FREQUENCY_GENERATOR_start(0);
 	}
 }
