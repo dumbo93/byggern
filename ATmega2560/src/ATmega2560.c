@@ -67,8 +67,9 @@ int main( void ){
 		}
 		
 		ir_val = IR_read();
+		printf("IR value: %d\n", ir_val);
 		if (ir_val - prev_ir_val != 0){
-			if (ir_val == 0){
+			if (ir_val < 4){
 				send.id = ATmega2560_ID;
 				send.data[0] = CAN_LIVES;
 				send.length = 1;

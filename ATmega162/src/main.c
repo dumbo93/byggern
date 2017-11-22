@@ -38,7 +38,7 @@ int main( void )
 	TIMER_init();
 	SEND2CAN_init();
 	
-	//printf("Init done\n");
+	printf("Init done\n");
 	sei();
 	STATE_OPTION_set(menu);
 

@@ -85,7 +85,6 @@ ISR(TIMER3_COMPA_vect)
 			default:
 				break;
 		}
-		printf("NUmber: %d\n", number);
 		BUZZ_start_note(pgm_read_float(&frequency[current_song][number]), pgm_read_byte(&duration[current_song][number]));
 	}
 	else{
